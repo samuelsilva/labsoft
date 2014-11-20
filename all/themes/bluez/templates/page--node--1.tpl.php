@@ -65,7 +65,7 @@
 	  
     <?php
       //  imprimir menu da pagina inicial
-      $menu = menu_navigation_links('menu-selecao');
+      $menu = menu_navigation_links('menu-selecao-de-campos');
       print theme('links',array('links' => $menu)); 
     ?> 	  
       <?php /* if ($page['content_top']): ?><div id="content_top"><?php print render($page['content_top']); ?></div><?php endif; ?>
@@ -81,7 +81,7 @@
     <!-- navigation START -->
     <div>
       <div>
-        <?php //print drupal_render($main_menu_tree); ?>
+        <?php print drupal_render($main_menu_tree); ?>
       </div>
     </div>
     <!-- navigation Ends -->

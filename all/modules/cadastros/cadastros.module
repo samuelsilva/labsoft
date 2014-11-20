@@ -116,7 +116,26 @@ function cadastros_menu() {
 
 function _cadastros_cadastro_client() {
 	$form = array();
+
+	//******Tipo de cliente
+	//Geral - cliente - adverso - advogado adverso - advogado cliente
+	$form['cadastro_type']['types'] = array(
+		'#type' => 'checkboxes',
+		'#options' => drupal_map_assoc(array('Geral','Cliente','Adverso','Advogado Adverso','Advogado Cliente')),
+		'#title' => 'Tipo de cadastro',
+	);
 	
+	$form['pessoa']['types'] = array(
+		'#type' => 'radios',
+		'#default_value' => 0,
+		'#options' => array(0 => 'Pessoa Física', 1 => 'Pessoa Jurídica'),
+		'#title' => 'Pessoa',
+	);
+		
+	$form['observacao'] = array(
+		'#type' => 'textarea',
+		'#title' => 'Observações',
+	);
 	//******PRINCIPAL
 	//Nascimento
 	//RG - orgao expedidor
@@ -124,13 +143,21 @@ function _cadastros_cadastro_client() {
 	//CPF
 	//nacionalidade
 	//profissão - estado civil
-	$form['nome'] = array(
+	//definição do fieldset
+	$form['principal'] = array(
+		'#type' => 'fieldset',
+		'#title' => 'Principal',
+		'#collapsible' => TRUE,
+		'#collapsed' => FALSE,
+	);
+
+	$form['principal']['nome'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Nome do Cliente',
 		'#required' => true
 	);
 	
-	$form['data_nasc'] = array(
+	$form['principal']['data_nasc'] = array(
 		'#type' => 'date',
 		'#title' => 'Nascimento',
 		'#required' => true
@@ -138,43 +165,43 @@ function _cadastros_cadastro_client() {
 
 		
 	//RG varia de estado para estado
-	$form['RG'] = array(
+	$form['principal']['RG'] = array(
 		'#type' => 'textfield',
 		'#title' => 'RG',
 		'#required' => true
 	);
 	
-	$form['org_exp'] = array(
+	$form['principal']['org_exp'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Órgão Expedidor',
 		'#required' => true
 	);
 
-	$form['data_exp'] = array(
+	$form['principal']['data_exp'] = array(
 		'#type' => 'date',
 		'#title' => 'Data expedição',
 		'#required' => true
 	);
 	
-	$form['CPF'] = array(
+	$form['principal']['CPF'] = array(
 		'#type' => 'textfield',
 		'#title' => 'CPF',
 		'#required' => true
 	);
 
-	$form['nacionalidade'] = array(
+	$form['principal']['nacionalidade'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Nacionalidade',
 		'#required' => true
 	);
 
-	$form['profissao'] = array(
+	$form['principal']['profissao'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Profissão',
 		'#required' => true
 	);
 
-	$form['estado_civil'] = array(
+	$form['principal']['estado_civil'] = array(
        '#type' => 'select',
        '#title' => t('Estado Civil'),
        '#options' => array(
@@ -184,27 +211,33 @@ function _cadastros_cadastro_client() {
 			3 => t('Viúvo'),
 			4 => t('União Estável'),			
 		),
-       '#default_value' => $category['estado_civil'],
-       '#description' => t('Selecione o Estado Civil'),
+       '#default_value' => 0,
+       //'#description' => t('Selecione o Estado Civil'),
    );
 
 	//*******OUTROS
 	//PIS
 	//Numero da CT - Série
-	
-	$form['PIS'] = array(
+	$form['outros'] = array(
+		'#type' => 'fieldset',
+		'#title' => 'Outros',
+		'#collapsible' => TRUE,
+		'#collapsed' => FALSE,
+	);
+		
+	$form['outros']['PIS'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Profissão',
 		'#required' => false
 	);	
 	
-	$form['num_CT'] = array(
+	$form['outros']['num_CT'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Número da CT',
 		'#required' => false
 	);	
 	
-	$form['serie'] = array(
+	$form['outros']['serie'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Série',
 		'#required' => false
@@ -215,44 +248,50 @@ function _cadastros_cadastro_client() {
 	//estado - cidade - bairro
 	//telefone - contato
 	//email
+	$form['residencial'] = array(
+		'#type' => 'fieldset',
+		'#title' => 'Residencial',
+		'#collapsible' => TRUE,
+		'#collapsed' => FALSE,
+	);
 	
-	$form['residencial_endereco'] = array(
+	$form['residencial']['endereco'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Endereço',
 		'#required' => true
 	);	
 
-	$form['residencial_CEP'] = array(
+	$form['residencial']['CEP'] = array(
 		'#type' => 'textfield',
 		'#title' => 'CEP',
 		'#required' => false
 	);	
 	
-	$form['residencial_estado'] = array(
+	$form['residencial']['estado'] = array(
 		'#type' => 'textfield',
 		'#title' => 'UF',
 		'#required' => true
 	);	
 	
-	$form['residencial_cidade'] = array(
+	$form['residencial']['cidade'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Cidade',
 		'#required' => false
 	);	
 
-	$form['residencial_telefone'] = array(
+	$form['residencial']['telefone'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Telefone',
 		'#required' => false
 	);	
 	
-	$form['residencial_contato'] = array(
+	$form['residencial']['contato'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Contato',
 		'#required' => false
 	);	
 	
-	$form['residencial_email'] = array(
+	$form['residencial']['email'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Email',
 		'#required' => false
@@ -263,54 +302,56 @@ function _cadastros_cadastro_client() {
 	//estado - cidade - bairro
 	//telefone - contato
 	//email
+	$form['comercial'] = array(
+		'#type' => 'fieldset',
+		'#title' => 'Comercial',
+		'#collapsible' => TRUE,
+		'#collapsed' => FALSE,
+	);
 
-	$form['comercial_endereco'] = array(
+	$form['comercial']['endereco'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Endereço',
 		'#required' => true
 	);	
 
-	$form['comercial_CEP'] = array(
+	$form['comercial']['CEP'] = array(
 		'#type' => 'textfield',
 		'#title' => 'CEP',
 		'#required' => false
 	);	
 	
-	$form['comercial_estado'] = array(
+	$form['comercial']['estado'] = array(
 		'#type' => 'textfield',
 		'#title' => 'UF',
 		'#required' => true
 	);	
 	
-	$form['comercial_cidade'] = array(
+	$form['comercial']['cidade'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Cidade',
 		'#required' => false
 	);	
 
-	$form['comercial_telefone'] = array(
+	$form['comercial']['telefone'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Telefone',
 		'#required' => false
 	);	
 	
-	$form['comercial_contato'] = array(
+	$form['comercial']['contato'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Contato',
 		'#required' => false
 	);	
 	
-	$form['comercial_email'] = array(
+	$form['comercial']['email'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Email',
 		'#required' => false
 	);	
 
 	
-
-	
-	
-
 	
 	$form['enviar'] = array(
 		'#type' => 'submit',
