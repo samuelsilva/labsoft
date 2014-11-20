@@ -1,0 +1,39 @@
+<?php
+
+/**
+  * Implements hook_menu().
+  */
+function processos_menu() {
+	$items = array();
+	
+	//cadastro de cliente
+	$items['processos/processo_basico'] = array(
+		'title' => 'Processos',
+		'description' => 'Cadastro de processos',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('_processos_cadastro_basico'),
+		'access arguments' => array('access content')
+	);
+	
+	
+	return $items;
+}
+
+
+function _processos_cadastro_basico() {
+	$form = array();
+
+	$form['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome da Vara',
+		'#required' => true
+	);
+	
+	$form['enviar'] = array(
+		'#type' => 'submit',
+		'#value' => 'Enviar',
+		'#required' => true
+	);
+	
+	return $form;
+}

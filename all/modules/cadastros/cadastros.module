@@ -1,0 +1,502 @@
+<?php
+
+function cadastros_user_login(&$edit, $account) {
+	$edit['redirect'] = 'node/1';
+}
+
+/**
+  * Implements hook_menu().
+  */
+function cadastros_menu() {
+	$items = array();
+	
+	//cadastro de cliente
+	$items['cadastro/cliente'] = array(
+		'title' => 'Cadastro de Cliente',
+		'description' => 'Cadastre aqui o cliente',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('_cadastros_cadastro_client'),
+		'access arguments' => array('access content')
+	);
+	
+	//cadastro de varas
+	$items['cadastro/varas'] = array(
+		'title' => 'Cadastro de Varas',
+		'description' => 'Cadastre aqui as varas judiciais',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('_cadastros_cadastro_vara'),
+		'access arguments' => array('access content')
+	);
+	
+	//cadastro de comarcas
+	$items['cadastro/comarcas'] = array(
+		'title' => 'Cadastro de Comarcas',
+		'description' => 'Cadastre aqui as comarcas',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('_cadastros_cadastro_comarca'),
+		'access arguments' => array('access content')
+	);
+	
+	//cadastro de natureza
+	$items['cadastro/naturezas'] = array(
+		'title' => 'Cadastro de Natureza',
+		'description' => 'Cadastre aqui a natureza do processo',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('_cadastros_cadastro_natureza'),
+		'access arguments' => array('access content')
+	);
+	
+	//cadastro de tribunais
+	$items['cadastro/tribunais'] = array(
+		'title' => 'Cadastro do Tribunal',
+		'description' => 'Cadastre aqui os tribunais',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('_cadastros_cadastro_tribunais'),
+		'access arguments' => array('access content')
+	);
+
+	//cadastro de ação
+	$items['cadastro/acao'] = array(
+		'title' => 'Cadastro de Tipo de Ação',
+		'description' => 'Cadastre aqui as os tipos de ação',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('_cadastros_cadastro_acao'),
+		'access arguments' => array('access content')
+	);
+
+	//cadastro de conta
+	$items['cadastro/conta'] = array(
+		'title' => 'Cadastro de Tipo de Conta',
+		'description' => 'Cadastre aqui os tipos de conta',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('_cadastros_cadastro_conta'),
+		'access arguments' => array('access content')
+	);
+
+	//cadastro de fase processual
+	$items['cadastro/fase_processual'] = array(
+		'title' => 'Cadastro de Fase Processual',
+		'description' => 'Cadastre aqui as Fases Processuais',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('_cadastros_cadastro_fase_processual'),
+		'access arguments' => array('access content')
+	);
+
+	//cadastro de regional/sucursal
+	$items['cadastro/regional'] = array(
+		'title' => 'Cadastro de Regional/Sucursal',
+		'description' => 'Cadastre aqui a Regional/Sucursal',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('_cadastros_cadastro_regional'),
+		'access arguments' => array('access content')
+	);
+
+	//cadastro de Recursos(tribunais)
+	$items['cadastro/recursos'] = array(
+		'title' => 'Cadastro de Recursos',
+		'description' => 'Cadastre aqui o Recurso(tribunal)',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('_cadastros_cadastro_recurso'),
+		'access arguments' => array('access content')
+	);
+
+	//cadastro de Possibilidade de exito
+	$items['cadastro/regional'] = array(
+		'title' => 'Cadastro de Possibilidade de Êxito',
+		'description' => 'Cadastre aqui a possibilidade de êxito',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('_cadastros_cadastro_possibilidade_exito'),
+		'access arguments' => array('access content')
+	);
+
+	
+	return $items;
+}
+
+
+function _cadastros_cadastro_client() {
+	$form = array();
+	
+	//******PRINCIPAL
+	//Nascimento
+	//RG - orgao expedidor
+	//Data exp
+	//CPF
+	//nacionalidade
+	//profissão - estado civil
+	$form['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome do Cliente',
+		'#required' => true
+	);
+	
+	$form['data_nasc'] = array(
+		'#type' => 'date',
+		'#title' => 'Nascimento',
+		'#required' => true
+	);
+
+		
+	//RG varia de estado para estado
+	$form['RG'] = array(
+		'#type' => 'textfield',
+		'#title' => 'RG',
+		'#required' => true
+	);
+	
+	$form['org_exp'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Órgão Expedidor',
+		'#required' => true
+	);
+
+	$form['data_exp'] = array(
+		'#type' => 'date',
+		'#title' => 'Data expedição',
+		'#required' => true
+	);
+	
+	$form['CPF'] = array(
+		'#type' => 'textfield',
+		'#title' => 'CPF',
+		'#required' => true
+	);
+
+	$form['nacionalidade'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nacionalidade',
+		'#required' => true
+	);
+
+	$form['profissao'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Profissão',
+		'#required' => true
+	);
+
+	$form['estado_civil'] = array(
+       '#type' => 'select',
+       '#title' => t('Estado Civil'),
+       '#options' => array(
+			0 => t('Solteiro'),
+			1 => t('Casado'),
+			2 => t('Divorciado'),
+			3 => t('Viúvo'),
+			4 => t('União Estável'),			
+		),
+       '#default_value' => $category['estado_civil'],
+       '#description' => t('Selecione o Estado Civil'),
+   );
+
+	//*******OUTROS
+	//PIS
+	//Numero da CT - Série
+	
+	$form['PIS'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Profissão',
+		'#required' => false
+	);	
+	
+	$form['num_CT'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Número da CT',
+		'#required' => false
+	);	
+	
+	$form['serie'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Série',
+		'#required' => false
+	);	
+	
+	//*******RESIDENCIAL
+	//Endereço - CEP
+	//estado - cidade - bairro
+	//telefone - contato
+	//email
+	
+	$form['residencial_endereco'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Endereço',
+		'#required' => true
+	);	
+
+	$form['residencial_CEP'] = array(
+		'#type' => 'textfield',
+		'#title' => 'CEP',
+		'#required' => false
+	);	
+	
+	$form['residencial_estado'] = array(
+		'#type' => 'textfield',
+		'#title' => 'UF',
+		'#required' => true
+	);	
+	
+	$form['residencial_cidade'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Cidade',
+		'#required' => false
+	);	
+
+	$form['residencial_telefone'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Telefone',
+		'#required' => false
+	);	
+	
+	$form['residencial_contato'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Contato',
+		'#required' => false
+	);	
+	
+	$form['residencial_email'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Email',
+		'#required' => false
+	);	
+	
+	//*******COMERCIAL
+	//Endereço - CEP
+	//estado - cidade - bairro
+	//telefone - contato
+	//email
+
+	$form['comercial_endereco'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Endereço',
+		'#required' => true
+	);	
+
+	$form['comercial_CEP'] = array(
+		'#type' => 'textfield',
+		'#title' => 'CEP',
+		'#required' => false
+	);	
+	
+	$form['comercial_estado'] = array(
+		'#type' => 'textfield',
+		'#title' => 'UF',
+		'#required' => true
+	);	
+	
+	$form['comercial_cidade'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Cidade',
+		'#required' => false
+	);	
+
+	$form['comercial_telefone'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Telefone',
+		'#required' => false
+	);	
+	
+	$form['comercial_contato'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Contato',
+		'#required' => false
+	);	
+	
+	$form['comercial_email'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Email',
+		'#required' => false
+	);	
+
+	
+
+	
+	
+
+	
+	$form['enviar'] = array(
+		'#type' => 'submit',
+		'#value' => 'Enviar',
+		'#required' => true
+	);
+	
+	return $form;
+}
+
+function _cadastros_cadastro_vara() {
+	$form = array();
+	
+	$form['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome da Vara',
+		'#required' => true
+	);
+	
+	$form['enviar'] = array(
+		'#type' => 'submit',
+		'#value' => 'Enviar',
+		'#required' => true
+	);
+	
+	return $form;
+}
+
+function _cadastros_cadastro_comarca() {
+	$form = array();
+	
+	$form['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome da Comarca',
+		'#required' => true
+	);
+	
+	$form['enviar'] = array(
+		'#type' => 'submit',
+		'#value' => 'Enviar',
+		'#required' => true
+	);
+	
+	return $form;
+}
+
+function _cadastros_cadastro_natureza() {
+	$form = array();
+	
+	$form['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome da Natureza',
+		'#required' => true
+	);
+	
+	$form['enviar'] = array(
+		'#type' => 'submit',
+		'#value' => 'Enviar',
+		'#required' => true
+	);
+	
+	return $form;
+}
+
+function _cadastros_cadastro_tribunais() {
+	$form = array();
+	
+	$form['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome do Tribunal',
+		'#required' => true
+	);
+	
+	$form['enviar'] = array(
+		'#type' => 'submit',
+		'#value' => 'Enviar',
+		'#required' => true
+	);
+	
+	return $form;
+}
+
+function _cadastros_cadastro_acao() {
+	$form = array();
+	
+	$form['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome do Tipo de Ação',
+		'#required' => true
+	);
+	
+	$form['enviar'] = array(
+		'#type' => 'submit',
+		'#value' => 'Enviar',
+		'#required' => true
+	);
+	
+	return $form;
+}
+
+function _cadastros_cadastro_conta() {
+	$form = array();
+	
+	$form['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome do Tipo de Conta',
+		'#required' => true
+	);
+	
+	$form['enviar'] = array(
+		'#type' => 'submit',
+		'#value' => 'Enviar',
+		'#required' => true
+	);
+	
+	return $form;
+}
+function _cadastros_cadastro_regional() {
+	$form = array();
+	
+	$form['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome da Regional/Sucursal',
+		'#required' => true
+	);
+	
+	$form['enviar'] = array(
+		'#type' => 'submit',
+		'#value' => 'Enviar',
+		'#required' => true
+	);
+	
+	return $form;
+}
+function _cadastros_cadastro_fase_processual() {
+	$form = array();
+	
+	$form['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome da Fase Processual',
+		'#required' => true
+	);
+	
+	$form['enviar'] = array(
+		'#type' => 'submit',
+		'#value' => 'Enviar',
+		'#required' => true
+	);
+	
+	return $form;
+}
+
+function _cadastros_cadastro_recurso() {
+	$form = array();
+	
+	$form['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome do Recurso(Tribunal)',
+		'#required' => true
+	);
+	
+	$form['enviar'] = array(
+		'#type' => 'submit',
+		'#value' => 'Enviar',
+		'#required' => true
+	);
+	
+	return $form;
+}
+
+function _cadastros_cadastro_possibilidade_exito() {
+	$form = array();
+	
+	$form['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome da Possibilidade de Êxito',
+		'#required' => true
+	);
+	
+	$form['enviar'] = array(
+		'#type' => 'submit',
+		'#value' => 'Enviar',
+		'#required' => true
+	);
+	
+	return $form;
+}
+
+
