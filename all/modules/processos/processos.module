@@ -6,7 +6,7 @@
 function processos_menu() {
 	$items = array();
 	
-	//cadastro de cliente
+	//cadastro de processos
 	$items['processos/processo_basico'] = array(
 		'title' => 'Processos',
 		'description' => 'Cadastro de processos',
@@ -15,19 +15,314 @@ function processos_menu() {
 		'access arguments' => array('access content')
 	);
 	
+	//cadastro de processos
+	$items['processos/processo_arquivado'] = array(
+		'title' => 'Processo Arquivado',
+		'description' => 'Cadastro de processos',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('_processos_cadastro_arquivado'),
+		'access arguments' => array('access content')
+	);
+	
+	//cadastro de processos
+	$items['processos/processo_corrente'] = array(
+		'title' => 'Processo Corrente',
+		'description' => 'Cadastro de processos',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('_processos_cadastro_corrente'),
+		'access arguments' => array('access content')
+	);
+	
 	
 	return $items;
 }
 
-
 function _processos_cadastro_basico() {
-	$form = array();
+	//redirecionar pro node de escolha de processos
+}
 
-	$form['nome'] = array(
+function _processos_cadastro_corrente() {
+	$form = array();
+	
+	//****Dados Processuais
+	$form['processuais'] = array(
+		'#type' => 'fieldset',
+		'#title' => 'Dados Processuais',
+		'#collapsible' => TRUE,
+		'#collapsed' => FALSE,
+	);
+	
+	$form['processuais']['nome'] = array(
 		'#type' => 'textfield',
-		'#title' => 'Nome da Vara',
+		'#title' => 'Processo',
 		'#required' => true
 	);
+	
+	$form['processuais']['inicio'] = array(
+		'#type' => 'date',
+		'#title' => 'Inicio',
+		'#required' => true
+	);
+	
+	$form['processuais']['valor'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Valor',
+		'#required' => true
+	);
+	
+	$form['processuais']['pasta'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Pasta',
+		'#required' => true
+	);
+	
+	$form['processuais']['subpasta'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Sub-Pasta',
+		'#required' => true
+	);
+	
+	$form['processuais']['regional'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Regional',
+		'#required' => true
+	);
+	
+	$form['processuais']['natureza'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Natureza',
+		'#required' => true
+	);
+	
+	$form['processuais']['acao'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Ação',
+		'#required' => true
+	);
+	
+	$form['processuais']['fase'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Fase',
+		'#required' => true
+	);
+	
+	$form['processuais']['comarca'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Comarca',
+		'#required' => true
+	);
+	
+	$form['processuais']['vara'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Vara',
+		'#required' => true
+	);
+	
+	$form['processuais']['exito'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Êxito',
+		'#required' => true
+	);
+	
+	//****CLIENTE
+	$form['cliente'] = array(
+		'#type' => 'fieldset',
+		'#title' => 'CLIENTE',
+		'#collapsible' => TRUE,
+		'#collapsed' => FALSE,
+	);
+	
+	$form['cliente']['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Cliente',
+		'#required' => true
+	);
+
+	$form['cliente']['parte'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Parte',
+		'#required' => true
+	);
+
+	$form['cliente']['advogado'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Advogado',
+		'#required' => true
+	);
+	
+	//****ADVERSO
+	$form['adverso'] = array(
+		'#type' => 'fieldset',
+		'#title' => 'ADVERSO',
+		'#collapsible' => TRUE,
+		'#collapsed' => FALSE,
+	);
+	
+	$form['adverso']['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Adverso',
+		'#required' => true
+	);
+
+	$form['adverso']['parte'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Parte',
+		'#required' => true
+	);
+
+	$form['adverso']['advogado'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Advogado',
+		'#required' => true
+	);
+	
+	
+	$form['enviar'] = array(
+		'#type' => 'submit',
+		'#value' => 'Enviar',
+		'#required' => true
+	);
+	
+	return $form;
+}
+
+
+
+function _processos_cadastro_arquivado() {
+	$form = array();
+	
+	//****Dados Processuais
+	$form['processuais'] = array(
+		'#type' => 'fieldset',
+		'#title' => 'Dados Processuais',
+		'#collapsible' => TRUE,
+		'#collapsed' => FALSE,
+	);
+	
+	$form['processuais']['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Processo',
+		'#required' => true
+	);
+	
+	$form['processuais']['inicio'] = array(
+		'#type' => 'date',
+		'#title' => 'Inicio',
+		'#required' => true
+	);
+	
+	$form['processuais']['valor'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Valor',
+		'#required' => true
+	);
+	
+	$form['processuais']['pasta'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Pasta',
+		'#required' => true
+	);
+	
+	$form['processuais']['subpasta'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Sub-Pasta',
+		'#required' => true
+	);
+	
+	$form['processuais']['regional'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Regional',
+		'#required' => true
+	);
+	
+	$form['processuais']['natureza'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Natureza',
+		'#required' => true
+	);
+	
+	$form['processuais']['acao'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Ação',
+		'#required' => true
+	);
+	
+	$form['processuais']['fase'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Fase',
+		'#required' => true
+	);
+	
+	$form['processuais']['comarca'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Comarca',
+		'#required' => true
+	);
+	
+	$form['processuais']['vara'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Vara',
+		'#required' => true
+	);
+	
+	$form['processuais']['exito'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Êxito',
+		'#required' => true
+	);
+	
+	//****CLIENTE
+	$form['cliente'] = array(
+		'#type' => 'fieldset',
+		'#title' => 'CLIENTE',
+		'#collapsible' => TRUE,
+		'#collapsed' => FALSE,
+	);
+	
+	$form['cliente']['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Cliente',
+		'#required' => true
+	);
+
+	$form['cliente']['parte'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Parte',
+		'#required' => true
+	);
+
+	$form['cliente']['advogado'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Advogado',
+		'#required' => true
+	);
+	
+	//****ADVERSO
+	$form['adverso'] = array(
+		'#type' => 'fieldset',
+		'#title' => 'ADVERSO',
+		'#collapsible' => TRUE,
+		'#collapsed' => FALSE,
+	);
+	
+	$form['adverso']['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Adverso',
+		'#required' => true
+	);
+
+	$form['adverso']['parte'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Parte',
+		'#required' => true
+	);
+
+	$form['adverso']['advogado'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Advogado',
+		'#required' => true
+	);
+	
 	
 	$form['enviar'] = array(
 		'#type' => 'submit',

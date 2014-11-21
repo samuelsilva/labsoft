@@ -146,7 +146,7 @@ function _cadastros_cadastro_client() {
 	//definição do fieldset
 	$form['principal'] = array(
 		'#type' => 'fieldset',
-		'#title' => 'Principal',
+		'#title' => 'PRINCIPAL',
 		'#collapsible' => TRUE,
 		'#collapsed' => FALSE,
 	);
@@ -220,9 +220,9 @@ function _cadastros_cadastro_client() {
 	//Numero da CT - Série
 	$form['outros'] = array(
 		'#type' => 'fieldset',
-		'#title' => 'Outros',
+		'#title' => 'OUTROS',
 		'#collapsible' => TRUE,
-		'#collapsed' => FALSE,
+		'#collapsed' => TRUE,
 	);
 		
 	$form['outros']['PIS'] = array(
@@ -250,9 +250,9 @@ function _cadastros_cadastro_client() {
 	//email
 	$form['residencial'] = array(
 		'#type' => 'fieldset',
-		'#title' => 'Residencial',
+		'#title' => 'RESIDENCIAL',
 		'#collapsible' => TRUE,
-		'#collapsed' => FALSE,
+		'#collapsed' => TRUE,
 	);
 	
 	$form['residencial']['endereco'] = array(
@@ -304,9 +304,9 @@ function _cadastros_cadastro_client() {
 	//email
 	$form['comercial'] = array(
 		'#type' => 'fieldset',
-		'#title' => 'Comercial',
+		'#title' => 'COMERCIAL',
 		'#collapsible' => TRUE,
-		'#collapsed' => FALSE,
+		'#collapsed' => TRUE,
 	);
 
 	$form['comercial']['endereco'] = array(
