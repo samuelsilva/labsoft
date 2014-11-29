@@ -1,5 +1,21 @@
 <?php
 
+function processos_form_alter(&$form, &$form_state, $form_id) {
+
+}
+
+function pr($array_or_object){
+	echo '<pre>',print_r($array_or_object,1),'</pre>';
+}
+
+function search_codSap($filterCodSap){
+	$result = db_result(db_query('SELECT * FROM {content_type_product} ctp WHERE ctp.field_codigo_value = %d',$filterCodSap));
+	return array( 'result' => $result);
+}
+
+
+
+
 /**
   * Implements hook_menu().
   */

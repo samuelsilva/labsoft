@@ -365,7 +365,7 @@ function _cadastros_cadastro_client() {
 function _cadastros_cadastro_vara() {
 	$form = array();
 	
-	$form['nome'] = array(
+	$form['nome_vara'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Nome da Vara',
 		'#required' => true
@@ -377,8 +377,50 @@ function _cadastros_cadastro_vara() {
 		'#required' => true
 	);
 	
+	//$form['#submit'][] = '_cadastros_cadastro_vara_settings_submit';
+	
 	return $form;
 }
+/*
+function _cadastros_cadastro_vara_settings($form,&$form_state){
+	$values = db_select('cadastro_vara','nome_vara')
+		->fields('nome_vara')
+		->execute()
+		->fetchAssoc();
+}
+
+function _cadastros_cadastro_vara_schema(){
+	'description' => 'Tabela cadastro de vara',
+	'fields' => array(
+		'varaid' => array(
+			'description' => 'Primary Key para Vara',
+			'type' => 'serial',
+			'unsigned' => TRUE,
+			'not null' => TRUE,
+		),
+		'nome_vara' => array(
+			'description' => 'Nome da Vara',
+			'type' => 'varchar',
+			'length' => 255,
+		),
+	'primary key' => array('varaid'),
+	);
+	return $schema;
+}
+/*
+function _cadastros_cadastro_vara_settings_submit($form,&$form_state){
+
+ 	//$actions = array_filter($form_state['values']['']);
+	$record = array(
+		'nome_vara' => $form_state['values']['nome_vara'];
+	);
+	//echo '<pre>',$form_state['values']['nome_vara'],'</pre>';
+	drupal_write_record('cadastro_vara',$record);
+	
+ 
+}
+*/
+
 
 function _cadastros_cadastro_comarca() {
 	$form = array();
