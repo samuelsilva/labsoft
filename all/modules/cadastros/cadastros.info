@@ -3,4 +3,6 @@ description = Módulo de cadastros básicos do sistema.
 package = Juridico
 core = 7.x
 
-
+files[] = cadastros.module
+files[] = cadastros.install
+files[] = cadastros.inc

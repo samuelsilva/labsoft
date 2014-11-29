@@ -1,0 +1,5 @@
+name = Teste
+description = Módulo de testes.
+package = Teste
+core = 7.x
+

@@ -1,0 +1,231 @@
+<?php
+
+/**
+  * Implements hook_menu().
+  */
+  
+function teste_menu() {
+
+
+	$items = array();
+	//cadastro de cliente
+	
+	$items['teste/cliente'] = array(
+		'title' => 'Cadastro de Cliente',
+		'description' => 'Cadastre aqui o cliente',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('_teste_cadastros_client'),
+		'access arguments' => array('access content')
+	);
+	
+	//cadastro de varas
+	$items['teste/projetos'] = array(
+		'title' => 'Cadastro de Projetos',
+		'description' => 'Cadastre aqui os projetos',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('_teste_cadastros_projetos'),
+		'access arguments' => array('access content')
+	);
+	
+	return $items;
+}
+
+
+
+function _teste_cadastros_projetos(){
+	$form = array();
+	
+	$form['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome do projeto',
+		'#required' => true
+	);
+	
+		$form['enviar'] = array(
+		'#type' => 'submit',
+		'#value' => 'Enviar',
+		'#required' => true
+	);
+	
+	return $form;
+}
+
+
+
+
+function _teste_cadastros_client() {
+	$form = array();
+
+	//******PRINCIPAL
+	//Nascimento
+	//RG - orgao expedidor
+	//Data exp
+	//CPF
+	//nacionalidade
+	//profissão - estado civil
+	//definição do fieldset
+	$form['principal'] = array(
+		'#type' => 'fieldset',
+		'#title' => 'PRINCIPAL',
+		'#collapsible' => TRUE,
+		'#collapsed' => FALSE,
+	);
+
+	$form['principal']['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome do Cliente',
+		'#required' => true
+	);
+	
+	$form['principal']['data_nasc'] = array(
+		'#type' => 'date',
+		'#title' => 'Nascimento',
+		'#required' => true
+	);
+
+		
+	//RG varia de estado para estado
+	$form['principal']['RG'] = array(
+		'#type' => 'textfield',
+		'#title' => 'RG',
+		'#required' => true
+	);
+	
+	$form['principal']['org_exp'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Órgão Expedidor',
+		'#required' => true
+	);
+
+	$form['principal']['data_exp'] = array(
+		'#type' => 'date',
+		'#title' => 'Data expedição',
+		'#required' => true
+	);
+	
+	$form['principal']['CPF'] = array(
+		'#type' => 'textfield',
+		'#title' => 'CPF',
+		'#required' => true
+	);
+
+	$form['principal']['nacionalidade'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nacionalidade',
+		'#required' => true
+	);
+
+	$form['principal']['profissao'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Profissão',
+		'#required' => true
+	);
+
+	$form['principal']['estado_civil'] = array(
+       '#type' => 'select',
+       '#title' => t('Estado Civil'),
+       '#options' => array(
+			0 => t('Solteiro'),
+			1 => t('Casado'),
+			2 => t('Divorciado'),
+			3 => t('Viúvo'),
+			4 => t('União Estável'),			
+		),
+       '#default_value' => 0,
+       //'#description' => t('Selecione o Estado Civil'),
+   );
+
+	//*******OUTROS
+	//PIS
+	//Numero da CT - Série
+	$form['outros'] = array(
+		'#type' => 'fieldset',
+		'#title' => 'OUTROS',
+		'#collapsible' => TRUE,
+		'#collapsed' => TRUE,
+	);
+		
+	$form['outros']['PIS'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Profissão',
+		'#required' => false
+	);	
+	
+	$form['outros']['num_CT'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Número da CT',
+		'#required' => false
+	);	
+	
+	$form['outros']['serie'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Série',
+		'#required' => false
+	);	
+	
+	//*******RESIDENCIAL
+	//Endereço - CEP
+	//estado - cidade - bairro
+	//telefone - contato
+	//email
+	$form['residencial'] = array(
+		'#type' => 'fieldset',
+		'#title' => 'RESIDENCIAL',
+		'#collapsible' => TRUE,
+		'#collapsed' => TRUE,
+	);
+	
+	$form['residencial']['endereco'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Endereço',
+		'#required' => true
+	);	
+
+	$form['residencial']['CEP'] = array(
+		'#type' => 'textfield',
+		'#title' => 'CEP',
+		'#required' => false
+	);	
+	
+	$form['residencial']['estado'] = array(
+		'#type' => 'textfield',
+		'#title' => 'UF',
+		'#required' => true
+	);	
+	
+	$form['residencial']['cidade'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Cidade',
+		'#required' => false
+	);	
+
+	$form['residencial']['telefone'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Telefone',
+		'#required' => false
+	);	
+	
+	$form['residencial']['contato'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Contato',
+		'#required' => false
+	);	
+	
+	$form['residencial']['email'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Email',
+		'#required' => false
+	);	
+	
+
+	
+	
+	$form['enviar'] = array(
+		'#type' => 'submit',
+		'#value' => 'Enviar',
+		'#required' => true
+	);
+	
+	return $form;
+}
+

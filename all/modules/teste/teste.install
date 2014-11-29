@@ -1,0 +1,79 @@
+<?php 
+
+function teste_schema(){
+	
+	$schema['projetos'] = array(
+		'description' => 'Tabela dos projetos.',
+		'fields' => array(
+		  'projeto_id' => array(
+			'description' => 'Id do projeto.',
+			'type' => 'serial',
+			'unsigned' => TRUE,
+			'not null' => TRUE,
+		  ),
+		  'projetos_nome' => array(
+			'description' => 'Nome do projeto.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+		),
+		'unique keys' => array(
+		'projeto_id' => array('projeto_id'),
+		),
+		'primary key' => array('projeto_id'),
+	);
+	
+	$schema['clientes'] = array(
+		'description' => 'Tabela dos clientes.',
+		'fields' => array(
+		  'cliente_id' => array(
+			'description' => 'Id do cliente.',
+			'type' => 'serial',
+			'unsigned' => TRUE,
+			'not null' => TRUE,
+		  ),
+		  'cliente_nome' => array(
+			'description' => 'Nome do cliente.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+		),
+		'unique keys' => array(
+		'cliente_id' => array('cliente_id'),
+		),
+		'primary key' => array('cliente_id'),
+	);
+
+
+	return $schema;
+}
+
+/*
+function teste_install() {
+  //Create my tables
+  drupal_install_schema('teste');
+  
+  // Populate the default {node_access} record.
+  db_insert('clientes')->fields(array(
+    'cliente_id' => 0,
+    'cliente_nome' => 'teste 1 do samuca',
+  ))->execute();
+
+  db_insert('projetos')->fields(array(
+    'projeto_id' => 0,
+    'projeto_nome' => 'teste 1 do samuca',
+  ))->execute();
+  * 
+}
+
+
+function teste_uninstall() {
+  //Drop my tables
+  drupal_uninstall_schema('teste');
+  
+}
+*/

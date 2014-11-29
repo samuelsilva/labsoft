@@ -1,0 +1,28 @@
+<?php 
+
+function processos_schema(){
+	/*
+	$schema['projetos'] = array(
+		'description' => 'Tabela dos projetos.',
+		'fields' => array(
+		  'projeto_id' => array(
+			'description' => 'Id do projeto.',
+			'type' => 'serial',
+			'unsigned' => TRUE,
+			'not null' => TRUE,
+		  ),
+		  'projetos_nome' => array(
+			'description' => 'Nome do projeto.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+		),
+		'unique keys' => array(
+		'projeto_id' => array('projeto_id'),
+		),
+		'primary key' => array('projeto_id'),
+	);
+	*/
+}

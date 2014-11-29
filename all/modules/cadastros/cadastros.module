@@ -25,7 +25,8 @@ function cadastros_menu() {
 		'description' => 'Cadastre aqui as varas judiciais',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_cadastros_cadastro_vara'),
-		'access arguments' => array('access content')
+		'access arguments' => array('access content'),
+		'file' => 'cadastros.inc',
 	);
 	
 	//cadastro de comarcas
@@ -34,7 +35,8 @@ function cadastros_menu() {
 		'description' => 'Cadastre aqui as comarcas',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_cadastros_cadastro_comarca'),
-		'access arguments' => array('access content')
+		'access arguments' => array('access content'),
+		'file' => 'cadastros.inc',
 	);
 	
 	//cadastro de natureza
@@ -43,7 +45,8 @@ function cadastros_menu() {
 		'description' => 'Cadastre aqui a natureza do processo',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_cadastros_cadastro_natureza'),
-		'access arguments' => array('access content')
+		'access arguments' => array('access content'),
+		'file' => 'cadastros.inc',
 	);
 	
 	//cadastro de tribunais
@@ -52,7 +55,8 @@ function cadastros_menu() {
 		'description' => 'Cadastre aqui os tribunais',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_cadastros_cadastro_tribunais'),
-		'access arguments' => array('access content')
+		'access arguments' => array('access content'),
+		'file' => 'cadastros.inc',
 	);
 
 	//cadastro de ação
@@ -61,7 +65,8 @@ function cadastros_menu() {
 		'description' => 'Cadastre aqui as os tipos de ação',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_cadastros_cadastro_acao'),
-		'access arguments' => array('access content')
+		'access arguments' => array('access content'),
+		'file' => 'cadastros.inc',
 	);
 
 	//cadastro de conta
@@ -70,7 +75,8 @@ function cadastros_menu() {
 		'description' => 'Cadastre aqui os tipos de conta',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_cadastros_cadastro_conta'),
-		'access arguments' => array('access content')
+		'access arguments' => array('access content'),
+		'file' => 'cadastros.inc',
 	);
 
 	//cadastro de fase processual
@@ -79,7 +85,8 @@ function cadastros_menu() {
 		'description' => 'Cadastre aqui as Fases Processuais',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_cadastros_cadastro_fase_processual'),
-		'access arguments' => array('access content')
+		'access arguments' => array('access content'),
+		'file' => 'cadastros.inc',
 	);
 
 	//cadastro de regional/sucursal
@@ -88,7 +95,8 @@ function cadastros_menu() {
 		'description' => 'Cadastre aqui a Regional/Sucursal',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_cadastros_cadastro_regional'),
-		'access arguments' => array('access content')
+		'access arguments' => array('access content'),
+		'file' => 'cadastros.inc',
 	);
 
 	//cadastro de Recursos(tribunais)
@@ -97,16 +105,18 @@ function cadastros_menu() {
 		'description' => 'Cadastre aqui o Recurso(tribunal)',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_cadastros_cadastro_recurso'),
-		'access arguments' => array('access content')
+		'access arguments' => array('access content'),
+		'file' => 'cadastros.inc',
 	);
 
 	//cadastro de Possibilidade de exito
-	$items['cadastro/regional'] = array(
+	$items['cadastro/exito'] = array(
 		'title' => 'Cadastro de Possibilidade de Êxito',
 		'description' => 'Cadastre aqui a possibilidade de êxito',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_cadastros_cadastro_possibilidade_exito'),
-		'access arguments' => array('access content')
+		'access arguments' => array('access content'),
+		'file' => 'cadastros.inc',
 	);
 
 	
@@ -365,7 +375,7 @@ function _cadastros_cadastro_client() {
 function _cadastros_cadastro_vara() {
 	$form = array();
 	
-	$form['nome_vara'] = array(
+	$form['nome'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Nome da Vara',
 		'#required' => true
@@ -377,50 +387,10 @@ function _cadastros_cadastro_vara() {
 		'#required' => true
 	);
 	
-	//$form['#submit'][] = '_cadastros_cadastro_vara_settings_submit';
+	$form['#submit'][] = '_cadastros_vara_settings_submit';
 	
 	return $form;
 }
-/*
-function _cadastros_cadastro_vara_settings($form,&$form_state){
-	$values = db_select('cadastro_vara','nome_vara')
-		->fields('nome_vara')
-		->execute()
-		->fetchAssoc();
-}
-
-function _cadastros_cadastro_vara_schema(){
-	'description' => 'Tabela cadastro de vara',
-	'fields' => array(
-		'varaid' => array(
-			'description' => 'Primary Key para Vara',
-			'type' => 'serial',
-			'unsigned' => TRUE,
-			'not null' => TRUE,
-		),
-		'nome_vara' => array(
-			'description' => 'Nome da Vara',
-			'type' => 'varchar',
-			'length' => 255,
-		),
-	'primary key' => array('varaid'),
-	);
-	return $schema;
-}
-/*
-function _cadastros_cadastro_vara_settings_submit($form,&$form_state){
-
- 	//$actions = array_filter($form_state['values']['']);
-	$record = array(
-		'nome_vara' => $form_state['values']['nome_vara'];
-	);
-	//echo '<pre>',$form_state['values']['nome_vara'],'</pre>';
-	drupal_write_record('cadastro_vara',$record);
-	
- 
-}
-*/
-
 
 function _cadastros_cadastro_comarca() {
 	$form = array();
@@ -437,6 +407,7 @@ function _cadastros_cadastro_comarca() {
 		'#required' => true
 	);
 	
+	$form['#submit'][] = '_cadastros_comarca_settings_submit';
 	return $form;
 }
 
@@ -455,6 +426,7 @@ function _cadastros_cadastro_natureza() {
 		'#required' => true
 	);
 	
+	$form['#submit'][] = '_cadastros_natureza_settings_submit';
 	return $form;
 }
 
@@ -473,6 +445,7 @@ function _cadastros_cadastro_tribunais() {
 		'#required' => true
 	);
 	
+	$form['#submit'][] = '_cadastros_tribunais_settings_submit';
 	return $form;
 }
 
@@ -491,6 +464,7 @@ function _cadastros_cadastro_acao() {
 		'#required' => true
 	);
 	
+	$form['#submit'][] = '_cadastros_acao_settings_submit';
 	return $form;
 }
 
@@ -509,8 +483,10 @@ function _cadastros_cadastro_conta() {
 		'#required' => true
 	);
 	
+	$form['#submit'][] = '_cadastros_conta_settings_submit';
 	return $form;
 }
+
 function _cadastros_cadastro_regional() {
 	$form = array();
 	
@@ -526,8 +502,10 @@ function _cadastros_cadastro_regional() {
 		'#required' => true
 	);
 	
+	$form['#submit'][] = '_cadastros_regional_settings_submit';
 	return $form;
 }
+
 function _cadastros_cadastro_fase_processual() {
 	$form = array();
 	
@@ -543,6 +521,7 @@ function _cadastros_cadastro_fase_processual() {
 		'#required' => true
 	);
 	
+	$form['#submit'][] = '_cadastros_fase_settings_submit';
 	return $form;
 }
 
@@ -561,6 +540,7 @@ function _cadastros_cadastro_recurso() {
 		'#required' => true
 	);
 	
+	$form['#submit'][] = '_cadastros_recurso_settings_submit';
 	return $form;
 }
 
@@ -579,6 +559,7 @@ function _cadastros_cadastro_possibilidade_exito() {
 		'#required' => true
 	);
 	
+	$form['#submit'][] = '_cadastros_exito_settings_submit';
 	return $form;
 }
 
