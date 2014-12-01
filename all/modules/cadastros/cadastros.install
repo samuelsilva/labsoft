@@ -241,5 +241,219 @@ function cadastros_schema(){
 		'primary key' => array('regional_id'),
 	);	
 
+	//criação da tabela de clientes
+	$schema['cadastros_clientes'] = array(
+		'description' => 'Tabela de cadastro de clientes.',
+		'fields' => array(
+		  //ETAPA PESSOAL
+		  'cliente_id' => array(
+			'description' => 'id dos clientes.',
+			'type' => 'serial',
+			'unsigned' => TRUE,
+			'not null' => TRUE,
+		  ),
+		  'nome' => array(
+			'description' => 'Nome dos clientes.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+		  /*'data_nasc' => array(
+			'description' => 'data de nascimento.',
+			'mysql_type' => 'date',
+			'length' => 10,
+			'not null' => TRUE,
+		  ),*/
+		  'RG' => array(
+			'description' => 'Registro Geral do cliente.',
+			'type' => 'varchar',
+			'length' => 40,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+		  'org_exp' => array(
+			'description' => 'Orgão expedidor do RG.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+		  /*'data_exp' => array(
+			'description' => 'data de expedição.',
+			'mysql_type' => 'date',
+			'length' => 10,
+			'not null' => TRUE,
+		  ),*/
+		  'CPF' => array( //tratar na validação dos dados
+			'description' => 'CPF dos clientes.',
+			'type' => 'varchar',
+			'length' => 44,
+			'not null' => TRUE,
+		  ),
+		  'nacionalidade' => array(
+			'description' => 'País de origem.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+		  'profissao' => array(
+			'description' => 'Profissão dos clientes.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+		  'estado_civil' => array(
+			'description' => 'Estado civil do cliente.', //	0 => 'Solteiro', 1 => 'Casado', 2 => 'Divorciado', 3 => 'Viúvo', 4 => 'União Estável'	
+			'type' => 'int',
+			'length' => 2,
+			'not null' => TRUE,
+			'default' => 0,
+		  ),
+		   //fim da ETAPA PESSOAL
+		   //ETAPA TIPO
+		  'tipo' => array(
+			'description' => 'Tipo dos clientes.', //0 => 'Geral', 1 => 'Cliente', 2 => 'Adverso', 3 => 'Advogado Adverso', 4 => 'Advogado Cliente'
+			'type' => 'int',
+			'length' => 4,
+			'not null' => TRUE,
+			'default' => 1,
+		  ),
+		  'pessoa_tipo' => array(
+			'description' => 'Fisica ou Juridica.', //0 => 'Pessoa Física', 1 => 'Pessoa Jurídica'
+			'type' => 'int',
+			'length' => 4,
+			'not null' => TRUE,
+			'default' => 0,
+		  ),
+		  'observacao' => array(
+			'description' => 'Nome dos clientes.',
+			'type' => 'varchar',
+			'length' => 512,
+			'not null' => FALSE,
+			'default' => '',
+		  ), 
+		   //fim da ETAPA TIPO
+		   //ETAPA OUTROS
+		  'PIS' => array(
+			'description' => 'Número do PIS dos clientes.', 
+			'type' => 'int',
+			'length' => 44,
+			'not null' => FALSE,
+		  ),
+		  'num_ct' => array(
+			'description' => 'numero da carteira de trabalho.', //0 => 'Pessoa Física', 1 => 'Pessoa Jurídica'
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => FALSE,
+		  ),
+		  'serie' => array(
+			'description' => 'numero de serie da CT.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => FALSE,
+			'default' => '',
+		  ), 
+		  //fim da ETAPA OUTROS
+		   //ETAPA RESIDENCIAL
+		  'res_endereco' => array(
+			'description' => 'Endereço residencial do cliente.', 
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+		  ),
+		  'res_CEP' => array(
+			'description' => 'numero do CEP.',
+			'type' => 'int',
+			'length' => 10,
+			'not null' => FALSE,
+		  ),
+		  'res_estado' => array(
+			'description' => 'estado do cliente.',
+			'type' => 'varchar',
+			'length' => 2,
+			'not null' => TRUE,
+			'default' => 'RS',
+		  ), 
+		  'res_cidade' => array(
+			'description' => 'cidade do cliente.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+		  ), 
+		  'res_telefone' => array(
+			'description' => 'telefone do cliente.',
+			'type' => 'int',
+			'length' => 25,
+			'not null' => FALSE,
+		  ), 
+		  'res_celular' => array(
+			'description' => 'celular do cliente.',
+			'type' => 'int',
+			'length' => 25,
+			'not null' => FALSE,
+		  ), 
+		  'res_email' => array(
+			'description' => 'estado do cliente.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => FALSE,
+		  ), 
+		  //fim da ETAPA RESIDENCIAL
+		  //ETAPA COMERCIAL
+		  'com_endereco' => array(
+			'description' => 'Endereço residencial do cliente.', 
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+		  ),
+		  'com_CEP' => array(
+			'description' => 'numero do CEP.',
+			'type' => 'int',
+			'length' => 10,
+			'not null' => FALSE,
+		  ),
+		  'com_estado' => array(
+			'description' => 'estado do cliente.',
+			'type' => 'varchar',
+			'length' => 2,
+			'not null' => TRUE,
+			'default' => 'RS',
+		  ), 
+		  'com_cidade' => array(
+			'description' => 'cidade do cliente.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+		  ), 
+		  'com_telefone' => array(
+			'description' => 'telefone do cliente.',
+			'type' => 'int',
+			'length' => 25,
+			'not null' => FALSE,
+		  ), 
+		  'com_celular' => array(
+			'description' => 'celular do cliente.',
+			'type' => 'int',
+			'length' => 25,
+			'not null' => FALSE,
+		  ), 
+		  'com_email' => array(
+			'description' => 'estado do cliente.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => FALSE,
+		  ), 
+		  //fim da ETAPA RESIDENCIAL
+		),
+		'unique keys' => array(
+		'cliente_id' => array('cliente_id'),
+		'CPF' => array('CPF'),
+		),
+		'primary key' => array('cliente_id'),
+	);	
+
 	return $schema;
 }

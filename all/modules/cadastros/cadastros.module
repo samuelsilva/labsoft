@@ -16,7 +16,8 @@ function cadastros_menu() {
 		'description' => 'Cadastre aqui o cliente',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_cadastros_cadastro_client'),
-		'access arguments' => array('access content')
+		'access arguments' => array('access content'),
+		'file' => 'cadastros.inc',
 	);
 	
 	//cadastro de varas
@@ -129,13 +130,13 @@ function _cadastros_cadastro_client() {
 
 	//******Tipo de cliente
 	//Geral - cliente - adverso - advogado adverso - advogado cliente
-	$form['cadastro_type']['types'] = array(
+	$form['tipo'] = array(
 		'#type' => 'checkboxes',
-		'#options' => drupal_map_assoc(array('Geral','Cliente','Adverso','Advogado Adverso','Advogado Cliente')),
+		'#options' => array(0 => 'Geral', 1 => 'Cliente', 2 => 'Adverso', 3 => 'Advogado Adverso', 4 => 'Advogado Cliente'),
 		'#title' => 'Tipo de cadastro',
 	);
 	
-	$form['pessoa']['types'] = array(
+	$form['pessoa_tipo'] = array(
 		'#type' => 'radios',
 		'#default_value' => 0,
 		'#options' => array(0 => 'Pessoa Física', 1 => 'Pessoa Jurídica'),
@@ -241,7 +242,7 @@ function _cadastros_cadastro_client() {
 		'#required' => false
 	);	
 	
-	$form['outros']['num_CT'] = array(
+	$form['outros']['num_ct'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Número da CT',
 		'#required' => false
@@ -265,43 +266,73 @@ function _cadastros_cadastro_client() {
 		'#collapsed' => TRUE,
 	);
 	
-	$form['residencial']['endereco'] = array(
+	$form['residencial']['res_endereco'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Endereço',
 		'#required' => true
 	);	
 
-	$form['residencial']['CEP'] = array(
+	$form['residencial']['res_CEP'] = array(
 		'#type' => 'textfield',
 		'#title' => 'CEP',
 		'#required' => false
 	);	
 	
-	$form['residencial']['estado'] = array(
-		'#type' => 'textfield',
+	$form['residencial']['res_estado'] = array(
+		'#type' => 'select',
 		'#title' => 'UF',
-		'#required' => true
+		'#options' => array(
+			'AC' => 'AC',
+			'AL' => 'AL',
+			'AP' => 'AP',
+			'AM' => 'AM',
+			'BA' => 'BA',
+			'CE' => 'CE',
+			'DF' => 'DF',
+			'ES' => 'ES',
+			'GO' => 'GO',
+			'MA' => 'MA',
+			'MT' => 'MT',
+			'MS' => 'MS',
+			'MG' => 'MG',
+			'PA' => 'PA',
+			'PB' => 'PB',
+			'PR' => 'PR',
+			'PE' => 'PE',
+			'PI' => 'PI',
+			'RJ' => 'RJ',
+			'RN' => 'RN',
+			'RS' => 'RS',
+			'RO' => 'RO',
+			'RR' => 'RR',
+			'SC' => 'SC',
+			'SP' => 'SP',
+			'SE' => 'SE',
+			'TO' => 'TO',
+		),
+		'#required' => true,
+		'#default_value' => 'RS',
 	);	
 	
-	$form['residencial']['cidade'] = array(
+	$form['residencial']['res_cidade'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Cidade',
 		'#required' => false
 	);	
 
-	$form['residencial']['telefone'] = array(
+	$form['residencial']['res_telefone'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Telefone',
 		'#required' => false
 	);	
 	
-	$form['residencial']['contato'] = array(
+	$form['residencial']['res_celular'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Contato',
 		'#required' => false
 	);	
 	
-	$form['residencial']['email'] = array(
+	$form['residencial']['res_email'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Email',
 		'#required' => false
@@ -319,49 +350,77 @@ function _cadastros_cadastro_client() {
 		'#collapsed' => TRUE,
 	);
 
-	$form['comercial']['endereco'] = array(
+	$form['comercial']['com_endereco'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Endereço',
-		'#required' => true
+		'#required' => false
 	);	
 
-	$form['comercial']['CEP'] = array(
+	$form['comercial']['com_CEP'] = array(
 		'#type' => 'textfield',
 		'#title' => 'CEP',
 		'#required' => false
 	);	
 	
-	$form['comercial']['estado'] = array(
-		'#type' => 'textfield',
+	$form['comercial']['com_estado'] = array(
+		'#type' => 'select',
 		'#title' => 'UF',
-		'#required' => true
+		'#options' => array(
+			'AC' => 'AC',
+			'AL' => 'AL',
+			'AP' => 'AP',
+			'AM' => 'AM',
+			'BA' => 'BA',
+			'CE' => 'CE',
+			'DF' => 'DF',
+			'ES' => 'ES',
+			'GO' => 'GO',
+			'MA' => 'MA',
+			'MT' => 'MT',
+			'MS' => 'MS',
+			'MG' => 'MG',
+			'PA' => 'PA',
+			'PB' => 'PB',
+			'PR' => 'PR',
+			'PE' => 'PE',
+			'PI' => 'PI',
+			'RJ' => 'RJ',
+			'RN' => 'RN',
+			'RS' => 'RS',
+			'RO' => 'RO',
+			'RR' => 'RR',
+			'SC' => 'SC',
+			'SP' => 'SP',
+			'SE' => 'SE',
+			'TO' => 'TO',
+		),
+		'#required' => true,
+		'#default_value' => 'RS',
 	);	
 	
-	$form['comercial']['cidade'] = array(
+	$form['comercial']['com_cidade'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Cidade',
 		'#required' => false
 	);	
 
-	$form['comercial']['telefone'] = array(
+	$form['comercial']['com_telefone'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Telefone',
 		'#required' => false
 	);	
 	
-	$form['comercial']['contato'] = array(
+	$form['comercial']['com_celular'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Contato',
 		'#required' => false
 	);	
 	
-	$form['comercial']['email'] = array(
+	$form['comercial']['com_email'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Email',
 		'#required' => false
-	);	
-
-	
+	);
 	
 	$form['enviar'] = array(
 		'#type' => 'submit',
@@ -369,6 +428,7 @@ function _cadastros_cadastro_client() {
 		'#required' => true
 	);
 	
+		$form['#submit'][] = '_cadastros_client_settings_submit';
 	return $form;
 }
 
