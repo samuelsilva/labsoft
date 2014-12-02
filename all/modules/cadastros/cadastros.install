@@ -259,12 +259,13 @@ function cadastros_schema(){
 			'not null' => TRUE,
 			'default' => '',
 		  ),
-		  /*'data_nasc' => array(
+		  'data_nasc' => array(
 			'description' => 'data de nascimento.',
-			'mysql_type' => 'date',
-			'length' => 10,
+			'type' => 'int',
+			'length' => 20,
 			'not null' => TRUE,
-		  ),*/
+			'default' => 0,
+		  ),
 		  'RG' => array(
 			'description' => 'Registro Geral do cliente.',
 			'type' => 'varchar',

@@ -117,13 +117,29 @@ function _cadastros_recurso_settings_submit($form,&$form_state){
 
 function _cadastros_client_settings_submit($form,&$form_state){
 	$table = 'cadastros_clientes';
-	
+	$mes = $form_state['values']['data_nasc']['month'];
+	$dia = $form_state['values']['data_nasc']['day'];
+	$ano = $form_state['values']['data_nasc']['year'];
+	$data_set = $ano.'/'.$mes.'/'.$dia;
+	$date_conversor_nasc = strtotime($data_set);
+
+	$mes = $form_state['values']['data_exp']['month'];
+	$dia = $form_state['values']['data_exp']['day'];
+	$ano = $form_state['values']['data_exp']['year'];
+	$data_set = $ano.'/'.$mes.'/'.$dia;
+	$date_conversor_exp = strtotime($data_set);
+
+
+	drupal_set_message(print_r($date_conversor_nasc,1),'warning');
+	drupal_set_message(print_r($date_conversor_exp,1),'warning');
 	$record = array(
 		'nome' => $form_state['values']['nome'],
-		//'data_nasc'=> $form_state['values']['data_nasc'],
+		'data_nasc'=> $date_conversor_nasc,
 		'RG' => $form_state['values']['RG'],
 		'org_exp' => $form_state['values']['org_exp'],
 		//'data_exp' => $form_state['values']['data_exp'],
+		'data_exp' => $date_conversor_exp,
+		
 		'CPF' => $form_state['values']['CPF'],
 		'nacionalidade' => $form_state['values']['nacionalidade'],
 		'profissao' => $form_state['values']['profissao'],
