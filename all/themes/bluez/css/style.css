@@ -1301,3 +1301,13 @@ h3.comment-title a {
 .col-content {
   font-size: 12px;
 }
+
+/*-------------------------------------------*
+/* Customizations
+/*-------------------------------------------*/
+
+/* Menu do admin */
+.links li {
+  list-style: outside none none;
+  margin-top: 15px;
+}
