@@ -62,11 +62,16 @@
   
   <div id="main">
     <div id="post-content">
-	  
+  	  
+      <ul class="links">
+        <li class="menu-332 first"><a class="menu-button" title="Link para a lista de processos" href="/drupal/content/processos"><img class="icon" src="<?php echo $base_path.'/'.drupal_get_path('theme', $GLOBALS['theme']); ?>/images/pencil.png"><br/>Processos</a></li>
+        <li class="menu-333"><a class="menu-button" title="Cadastre os dados dos clientes nesta parte do sistema" href="/drupal/content/cadastros"><img class="icon" src="<?php echo $base_path.'/'.drupal_get_path('theme', $GLOBALS['theme']); ?>/images/paper.png"><br/>Cadastros</a></li>
+        <li class="menu-334 last"><a class="menu-button" title="Cadastre os dados dos clientes nesta parte do sistema" href="/drupal/content/pesquisar"><img class="icon" src="<?php echo $base_path.'/'.drupal_get_path('theme', $GLOBALS['theme']); ?>/images/search.png"><br/>Pesquisar</a></li>
+      </ul>
     <?php
-      //  imprimir menu da pagina inicial
-      $menu = menu_navigation_links('menu-selecao-de-campos');
-      print theme('links',array('links' => $menu)); 
+      ////  imprimir menu da pagina inicial
+      //$menu = menu_navigation_links('menu-selecao-de-campos');
+      //print theme('links',array('links' => $menu)); 
     ?> 	  
       <?php /* if ($page['content_top']): ?><div id="content_top"><?php print render($page['content_top']); ?></div><?php endif; ?>
       <?php print render($title_prefix); ?>
