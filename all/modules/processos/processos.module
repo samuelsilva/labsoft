@@ -252,6 +252,10 @@ function returnDateCadastros($variable_type){
 	   case 9:
 			$table = 'cadastros_varas';
 			break;
+	   case 10:
+			$table = 'cadastros_clientes';
+			break;
+	
 	}
 	$result = db_query('select * from '.$table.'');
 
@@ -287,6 +291,12 @@ function _processos_cadastro_arquivado() {
 	$form['processuais']['inicio'] = array(
 		'#type' => 'date',
 		'#title' => 'Inicio',
+		'#required' => true
+	);
+
+	$form['processuais']['final'] = array(
+		'#type' => 'date',
+		'#title' => 'Arquivado em',
 		'#required' => true
 	);
 	
@@ -373,19 +383,22 @@ function _processos_cadastro_arquivado() {
 		'#collapsed' => FALSE,
 	);
 	
-	$form['cliente']['nome'] = array(
-		'#type' => 'textfield',
-		'#title' => 'Cliente',
+	$form['cliente']['cliente_nome'] = array(
+       '#type' => 'select',
+       '#title' => 'Cliente',
+       '#options' => returnDateCadastros(10),
 		'#required' => true
-	);
+       //'#default_value' => 0,
+       //'#description' => t('Selecione o Estado Civil'),
+    );
 
-	$form['cliente']['parte'] = array(
+	$form['cliente']['cliente_parte'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Parte',
 		'#required' => true
 	);
 
-	$form['cliente']['advogado'] = array(
+	$form['cliente']['cliente_advogado'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Advogado',
 		'#required' => true
@@ -399,19 +412,19 @@ function _processos_cadastro_arquivado() {
 		'#collapsed' => FALSE,
 	);
 	
-	$form['adverso']['nome'] = array(
+	$form['adverso']['adverso_nome'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Adverso',
 		'#required' => true
 	);
 
-	$form['adverso']['parte'] = array(
+	$form['adverso']['adverso_parte'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Parte',
 		'#required' => true
 	);
 
-	$form['adverso']['advogado'] = array(
+	$form['adverso']['adverso_advogado'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Advogado',
 		'#required' => true

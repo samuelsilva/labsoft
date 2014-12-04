@@ -246,7 +246,7 @@ function cadastros_schema(){
 		'description' => 'Tabela de cadastro de clientes.',
 		'fields' => array(
 		  //ETAPA PESSOAL
-		  'cliente_id' => array(
+		  'id' => array(
 			'description' => 'id dos clientes.',
 			'type' => 'serial',
 			'unsigned' => TRUE,
@@ -450,10 +450,10 @@ function cadastros_schema(){
 		  //fim da ETAPA RESIDENCIAL
 		),
 		'unique keys' => array(
-		'cliente_id' => array('cliente_id'),
+		'id' => array('id'),
 		'CPF' => array('CPF'),
 		),
-		'primary key' => array('cliente_id'),
+		'primary key' => array('id'),
 	);	
 
 	return $schema;
