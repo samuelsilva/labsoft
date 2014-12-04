@@ -99,46 +99,61 @@ function _processos_cadastro_corrente() {
 	);
 	
 	$form['processuais']['regional'] = array(
-		'#type' => 'textfield',
-		'#title' => 'Regional',
-		'#required' => true
-	);
+       '#type' => 'select',
+       '#title' => 'Regional',
+       '#options' => returnDateCadastros(6),
+       //'#default_value' => 0,
+       //'#description' => t('Selecione o Estado Civil'),
+    );
 	
 	$form['processuais']['natureza'] = array(
-		'#type' => 'textfield',
-		'#title' => 'Natureza',
-		'#required' => true
-	);
+       '#type' => 'select',
+       '#title' => 'Natureza',
+       '#options' => returnDateCadastros(5),
+       //'#default_value' => 0,
+       //'#description' => t('Selecione o Estado Civil'),
+   );
 	
 	$form['processuais']['acao'] = array(
-		'#type' => 'textfield',
-		'#title' => 'Ação',
-		'#required' => true
-	);
-	
+       '#type' => 'select',
+       '#title' => 'Ação',
+       '#options' => returnDateCadastros(0),
+       //'#default_value' => 0,
+       //'#description' => t('Selecione o Estado Civil'),
+   );
+
 	$form['processuais']['fase'] = array(
-		'#type' => 'textfield',
-		'#title' => 'Fase',
-		'#required' => true
-	);
-	
+       '#type' => 'select',
+       '#title' => 'Fase',
+       '#options' => returnDateCadastros(4),
+       //'#default_value' => 0,
+       //'#description' => t('Selecione o Estado Civil'),
+    );
+
 	$form['processuais']['comarca'] = array(
-		'#type' => 'textfield',
-		'#title' => 'Comarca',
-		'#required' => true
-	);
+       '#type' => 'select',
+       '#title' => 'Comarca',
+       '#options' => returnDateCadastros(1),
+       //'#default_value' => 0,
+       //'#description' => t('Selecione o Estado Civil'),
+    );
 	
 	$form['processuais']['vara'] = array(
-		'#type' => 'textfield',
-		'#title' => 'Vara',
-		'#required' => true
-	);
+       '#type' => 'select',
+       '#title' => 'Vara',
+       '#options' => returnDateCadastros(9),
+       //'#default_value' => 0,
+       //'#description' => t('Selecione o Estado Civil'),
+    );
 	
 	$form['processuais']['exito'] = array(
-		'#type' => 'textfield',
-		'#title' => 'Êxito',
-		'#required' => true
-	);
+       '#type' => 'select',
+       '#title' => 'Êxito',
+       '#options' => returnDateCadastros(3),
+       //'#default_value' => 0,
+       //'#description' => t('Selecione o Estado Civil'),
+    );
+
 	
 	//****CLIENTE
 	$form['cliente'] = array(
@@ -202,8 +217,216 @@ function _processos_cadastro_corrente() {
 	return $form;
 }
 
+//********funções auxiliares
+function returnDateCadastros($variable_type){
+	switch ($variable_type) {
+		case 0:
+			$table = 'cadastros_acao';
+			//drupal_set_message('Ação!','warning');
+			break;
+		case 1:
+			$table = 'cadastros_comarcas';
+			//drupal_set_message('Comarcas!','warning');
+			break;
+		case 2:
+			$table = 'cadastros_conta';
+			break;
+	   case 3:
+			$table = 'cadastros_exito';
+			break;
+	   case 4:
+			$table = 'cadastros_fase';
+			break;
+	   case 5:
+			$table = 'cadastros_natureza';
+			break;
+	   case 6:
+			$table = 'cadastros_regional';
+			break;
+	   case 7:
+			$table = 'cadastros_recursos';
+			break;
+	   case 8:
+			$table = 'cadastros_tribunal';
+			break;
+	   case 9:
+			$table = 'cadastros_varas';
+			break;
+	}
+	$result = db_query('select * from '.$table.'');
 
+	//montando a option
+	foreach($result as $rec => $value)
+	{
+		$new[$value->id] = $value->nome;
+		//visualizar a montagem do $new;
+		//drupal_set_message(dpr($new),'warning');
+	}
+    return $new;
+}
 
+//******* END funções auxiliares
+
+function _processos_cadastro_arquivado() {
+	$form = array();
+	
+	//****Dados Processuais
+	$form['processuais'] = array(
+		'#type' => 'fieldset',
+		'#title' => 'Dados Processuais',
+		'#collapsible' => TRUE,
+		'#collapsed' => FALSE,
+	);
+	
+	$form['processuais']['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Processo',
+		'#required' => true
+	);
+	
+	$form['processuais']['inicio'] = array(
+		'#type' => 'date',
+		'#title' => 'Inicio',
+		'#required' => true
+	);
+	
+	$form['processuais']['valor'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Valor',
+		'#required' => true
+	);
+	
+	$form['processuais']['pasta'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Pasta',
+		'#required' => true
+	);
+	
+	$form['processuais']['subpasta'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Sub-Pasta',
+		'#required' => true
+	);
+	
+	$form['processuais']['regional'] = array(
+       '#type' => 'select',
+       '#title' => 'Regional',
+       '#options' => returnDateCadastros(6),
+       //'#default_value' => 0,
+       //'#description' => t('Selecione o Estado Civil'),
+    );
+	
+	$form['processuais']['natureza'] = array(
+       '#type' => 'select',
+       '#title' => 'Natureza',
+       '#options' => returnDateCadastros(5),
+       //'#default_value' => 0,
+       //'#description' => t('Selecione o Estado Civil'),
+   );
+	
+	$form['processuais']['acao'] = array(
+       '#type' => 'select',
+       '#title' => 'Ação',
+       '#options' => returnDateCadastros(0),
+       //'#default_value' => 0,
+       //'#description' => t('Selecione o Estado Civil'),
+   );
+
+	$form['processuais']['fase'] = array(
+       '#type' => 'select',
+       '#title' => 'Fase',
+       '#options' => returnDateCadastros(4),
+       //'#default_value' => 0,
+       //'#description' => t('Selecione o Estado Civil'),
+    );
+
+	$form['processuais']['comarca'] = array(
+       '#type' => 'select',
+       '#title' => 'Comarca',
+       '#options' => returnDateCadastros(1),
+       //'#default_value' => 0,
+       //'#description' => t('Selecione o Estado Civil'),
+    );
+	
+	$form['processuais']['vara'] = array(
+       '#type' => 'select',
+       '#title' => 'Vara',
+       '#options' => returnDateCadastros(9),
+       //'#default_value' => 0,
+       //'#description' => t('Selecione o Estado Civil'),
+    );
+	
+	$form['processuais']['exito'] = array(
+       '#type' => 'select',
+       '#title' => 'Êxito',
+       '#options' => returnDateCadastros(3),
+       //'#default_value' => 0,
+       //'#description' => t('Selecione o Estado Civil'),
+    );
+
+	
+	//****CLIENTE
+	$form['cliente'] = array(
+		'#type' => 'fieldset',
+		'#title' => 'CLIENTE',
+		'#collapsible' => TRUE,
+		'#collapsed' => FALSE,
+	);
+	
+	$form['cliente']['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Cliente',
+		'#required' => true
+	);
+
+	$form['cliente']['parte'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Parte',
+		'#required' => true
+	);
+
+	$form['cliente']['advogado'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Advogado',
+		'#required' => true
+	);
+	
+	//****ADVERSO
+	$form['adverso'] = array(
+		'#type' => 'fieldset',
+		'#title' => 'ADVERSO',
+		'#collapsible' => TRUE,
+		'#collapsed' => FALSE,
+	);
+	
+	$form['adverso']['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Adverso',
+		'#required' => true
+	);
+
+	$form['adverso']['parte'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Parte',
+		'#required' => true
+	);
+
+	$form['adverso']['advogado'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Advogado',
+		'#required' => true
+	);
+	
+	
+	$form['enviar'] = array(
+		'#type' => 'submit',
+		'#value' => 'Enviar',
+		'#required' => true
+	);
+	
+	return $form;
+}
+/*
 function _processos_cadastro_arquivado() {
 	$form = array();
 	
@@ -348,3 +571,4 @@ function _processos_cadastro_arquivado() {
 	
 	return $form;
 }
+*/

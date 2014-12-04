@@ -5,7 +5,7 @@ function cadastros_schema(){
 	$schema['cadastros_varas'] = array(
 		'description' => 'Tabela de cadastro das varas.',
 		'fields' => array(
-		  'vara_id' => array(
+		  'id' => array(
 			'description' => 'Id da vara.',
 			'type' => 'serial',
 			'unsigned' => TRUE,
@@ -20,16 +20,16 @@ function cadastros_schema(){
 		  ),
 		),
 		'unique keys' => array(
-		'vara_id' => array('vara_id'),
+		'id' => array('id'),
 		),
-		'primary key' => array('vara_id'),
+		'primary key' => array('id'),
 	);
 	
 	//criação da tabela de fases processuais
 	$schema['cadastros_fase'] = array(
 		'description' => 'Tabela de cadastro das fases processuais.',
 		'fields' => array(
-		  'fase_id' => array(
+		  'id' => array(
 			'description' => 'Id da fase.',
 			'type' => 'serial',
 			'unsigned' => TRUE,
@@ -44,16 +44,16 @@ function cadastros_schema(){
 		  ),
 		),
 		'unique keys' => array(
-		'fase_id' => array('fase_id'),
+		'id' => array('id'),
 		),
-		'primary key' => array('fase_id'),
+		'primary key' => array('id'),
 	);
 		
 	//criação da tabela de natureza
 	$schema['cadastros_natureza'] = array(
 		'description' => 'Tabela de cadastro das fases processuais.',
 		'fields' => array(
-		  'natureza_id' => array(
+		  'id' => array(
 			'description' => 'Id da natureza.',
 			'type' => 'serial',
 			'unsigned' => TRUE,
@@ -68,16 +68,16 @@ function cadastros_schema(){
 		  ),
 		),
 		'unique keys' => array(
-		'natureza_id' => array('natureza_id'),
+		'id' => array('id'),
 		),
-		'primary key' => array('natureza_id'),
+		'primary key' => array('id'),
 	);
 	
 	//criação da tabela de possibilidade de exito
 	$schema['cadastros_exito'] = array(
 		'description' => 'Tabela de cadastro das possibilidades de êxito.',
 		'fields' => array(
-		  'exito_id' => array(
+		  'id' => array(
 			'description' => 'Id do exito.',
 			'type' => 'serial',
 			'unsigned' => TRUE,
@@ -92,16 +92,16 @@ function cadastros_schema(){
 		  ),
 		),
 		'unique keys' => array(
-		'exito_id' => array('exito_id'),
+		'id' => array('id'),
 		),
-		'primary key' => array('exito_id'),
+		'primary key' => array('id'),
 	);	
 
 	//criação da tabela de recursos
 	$schema['cadastros_recursos'] = array(
 		'description' => 'Tabela de cadastro de recursos.',
 		'fields' => array(
-		  'recursos_id' => array(
+		  'id' => array(
 			'description' => 'Id dos recursos.',
 			'type' => 'serial',
 			'unsigned' => TRUE,
@@ -116,16 +116,16 @@ function cadastros_schema(){
 		  ),
 		),
 		'unique keys' => array(
-		'recursos_id' => array('recursos_id'),
+		'id' => array('id'),
 		),
-		'primary key' => array('recursos_id'),
+		'primary key' => array('id'),
 	);	
 
 	//criação da tabela de tipos de ação
 	$schema['cadastros_acao'] = array(
 		'description' => 'Tabela de cadastro de tipos de ação.',
 		'fields' => array(
-		  'acao_id' => array(
+		  'id' => array(
 			'description' => 'Id dos tipos de ação.',
 			'type' => 'serial',
 			'unsigned' => TRUE,
@@ -140,16 +140,16 @@ function cadastros_schema(){
 		  ),
 		),
 		'unique keys' => array(
-		'acao_id' => array('acao_id'),
+		'id' => array('id'),
 		),
-		'primary key' => array('acao_id'),
+		'primary key' => array('id'),
 	);	
 
 	//criação da tabela de tipos de conta
 	$schema['cadastros_conta'] = array(
 		'description' => 'Tabela de cadastro de tipos de conta.',
 		'fields' => array(
-		  'conta_id' => array(
+		  'id' => array(
 			'description' => 'Id das contas.',
 			'type' => 'serial',
 			'unsigned' => TRUE,
@@ -164,16 +164,16 @@ function cadastros_schema(){
 		  ),
 		),
 		'unique keys' => array(
-		'conta_id' => array('conta_id'),
+		'id' => array('id'),
 		),
-		'primary key' => array('conta_id'),
+		'primary key' => array('id'),
 	);	
 
 	//criação da tabela de tribunais
 	$schema['cadastros_tribunal'] = array(
 		'description' => 'Tabela de cadastro de tribunais.',
 		'fields' => array(
-		  'tribunal_id' => array(
+		  'id' => array(
 			'description' => 'Id dos tribunais.',
 			'type' => 'serial',
 			'unsigned' => TRUE,
@@ -188,16 +188,16 @@ function cadastros_schema(){
 		  ),
 		),
 		'unique keys' => array(
-		'tribunal_id' => array('tribunal_id'),
+		'id' => array('id'),
 		),
-		'primary key' => array('tribunal_id'),
+		'primary key' => array('id'),
 	);	
 
 	//criação da tabela de comarcas
 	$schema['cadastros_comarcas'] = array(
 		'description' => 'Tabela de cadastro de comarcas.',
 		'fields' => array(
-		  'comarcas_id' => array(
+		  'id' => array(
 			'description' => 'Id das comarcas.',
 			'type' => 'serial',
 			'unsigned' => TRUE,
@@ -212,16 +212,16 @@ function cadastros_schema(){
 		  ),
 		),
 		'unique keys' => array(
-		'comarcas_id' => array('comarcas_id'),
+		'id' => array('id'),
 		),
-		'primary key' => array('comarcas_id'),
+		'primary key' => array('id'),
 	);	
 
 	//criação da tabela de comarcas
 	$schema['cadastros_regional'] = array(
 		'description' => 'Tabela de cadastro de regional/sucursal.',
 		'fields' => array(
-		  'regional_id' => array(
+		  'id' => array(
 			'description' => 'Id das regionais/sucursais.',
 			'type' => 'serial',
 			'unsigned' => TRUE,
@@ -236,9 +236,9 @@ function cadastros_schema(){
 		  ),
 		),
 		'unique keys' => array(
-		'regional_id' => array('regional_id'),
+		'id' => array('id'),
 		),
-		'primary key' => array('regional_id'),
+		'primary key' => array('id'),
 	);	
 
 	//criação da tabela de clientes

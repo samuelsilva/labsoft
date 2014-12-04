@@ -130,8 +130,8 @@ function _cadastros_client_settings_submit($form,&$form_state){
 	$date_conversor_exp = strtotime($data_set);
 
 
-	drupal_set_message(print_r($date_conversor_nasc,1),'warning');
-	drupal_set_message(print_r($date_conversor_exp,1),'warning');
+	//drupal_set_message(print_r($date_conversor_nasc,1),'warning');
+	//drupal_set_message(print_r($date_conversor_exp,1),'warning');
 	$record = array(
 		'nome' => $form_state['values']['nome'],
 		'data_nasc'=> $date_conversor_nasc,
