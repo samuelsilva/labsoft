@@ -1307,33 +1307,37 @@ h3.comment-title a {
 /*-------------------------------------------*/
 
 /* Menu do admin */
+.links {
+  display: inline;
+}
+
 .links li {
   list-style: outside none none;
   margin-top: 15px;
 }
 
-.links li .menu-button{
+.menu-button{
   position:relative;
   font-family: arial;
   text-align: center;
+  font-size: 200%;
   background-color:#3D2C29 !important;
-  display: block;
+  display: inline-block;
   border-radius:10px;
   color: white;
   text-decoration: none;
-  margin:5px;
-  width: 80px;
-  height: 80px;
+  margin:15px;
+  width: 160px;
+  height: 160px;
 }
 
-.links li .menu-button:hover{
+.menu-button:hover{
   background-color:#BBAA88 !important;
   color:#FFF !important;
 }
 
 .icon{
-  margin-left: auto;
-  margin-right: auto;
-  width: 50px;
-  height: 50px;
+  margin-top: 15px;
+  width: 100px;
+  height: 100px;
 }
