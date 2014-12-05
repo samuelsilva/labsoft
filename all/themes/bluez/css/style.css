@@ -1353,7 +1353,7 @@ h3.comment-title a {
    background-color: #BA8;
 }
 table, tr, td, th {
-    border: 1px solid black;
+    border: 0;
 }
 td {
     padding: 5px;
