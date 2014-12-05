@@ -64,7 +64,9 @@
     <div id="post-content">
         <a class="menu-button" title="Link para a lista de processos" href="/drupal/content/cadastros"><img class="icon" src="<?php echo $base_path.'/'.drupal_get_path('theme', $GLOBALS['theme']); ?>/images/pencil.png"><br/>Cadastros</a>
         <a class="menu-button" title="Cadastre os dados dos clientes nesta parte do sistema" href="/drupal/content/processos"><img class="icon" src="<?php echo $base_path.'/'.drupal_get_path('theme', $GLOBALS['theme']); ?>/images/paper.png"><br/>Processos</a>
-        <a class="menu-button" title="Cadastre os dados dos clientes nesta parte do sistema" href="/drupal/content/pesquisar"><img class="icon" src="<?php echo $base_path.'/'.drupal_get_path('theme', $GLOBALS['theme']); ?>/images/search.png"><br/>Pesquisar</a>
+        <a class="menu-button" title="Pesquise os itens cadastrados nesta parte do sistema" href="/drupal/content/pesquisar"><img class="icon" src="<?php echo $base_path.'/'.drupal_get_path('theme', $GLOBALS['theme']); ?>/images/search.png"><br/>Pesquisar</a>
+        <a class="menu-button" title="Verifique os processos correntes nesta parte do sistema" href="/drupal/content/processos_correntes"><img class="icon" src="<?php echo $base_path.'/'.drupal_get_path('theme', $GLOBALS['theme']); ?>/images/scale.png"><br/>Processos correntes</a>
+        <a class="menu-button" title="Verifique os processos arquivados nesta parte do sistema" href="/drupal/content/processos_arquivados"><img class="icon" src="<?php echo $base_path.'/'.drupal_get_path('theme', $GLOBALS['theme']); ?>/images/archive.png"><br/>Processos arquivados</a>
     <?php
       ////  imprimir menu da pagina inicial
       //$menu = menu_navigation_links('menu-selecao-de-campos');
