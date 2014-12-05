@@ -1341,3 +1341,20 @@ h3.comment-title a {
   width: 100px;
   height: 100px;
 }
+
+/* Tabelas zebradas */
+.zebra_table{
+    border-collapse: collapse;
+}
+.zebra_table tr:nth-child(odd) {
+   background-color: #CDD;
+}
+.zebra_table tr:first-child {
+   background-color: #BA8;
+}
+table, tr, td, th {
+    border: 1px solid black;
+}
+td {
+    padding: 5px;
+}
