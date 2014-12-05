@@ -103,3 +103,33 @@ function bluez_preprocess_page(&$vars) {
   );
   $vars['slideimage3'] = theme('image', $image3var);
 }
+
+
+
+/**
+ * Implements hook_theme().
+ */
+function bluez_theme($existing, $type, $theme, $path) {
+  $base = array(
+    'render element' => 'form',
+    'path' => drupal_get_path('theme', 'bluez') . '/templates/',
+  );
+
+  return array(
+    'processos_basico' => $base + array(
+      'template' => 'processos-basico',
+    ),
+  );
+}
+
+/**
+ * Preprocessor for commerce_checkout_form_checkout theme.
+ */
+function bluez_preprocess_processos_basico(&$variables) {
+  /* Add or modify your variables */
+  dpr($variables);
+}
+
+
+
+

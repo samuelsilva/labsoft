@@ -280,12 +280,6 @@ function cadastros_schema(){
 			'not null' => TRUE,
 			'default' => '',
 		  ),
-		  /*'data_exp' => array(
-			'description' => 'data de expedição.',
-			'mysql_type' => 'date',
-			'length' => 10,
-			'not null' => TRUE,
-		  ),*/
 		  'CPF' => array( //tratar na validação dos dados
 			'description' => 'CPF dos clientes.',
 			'type' => 'varchar',
@@ -458,3 +452,4 @@ function cadastros_schema(){
 
 	return $schema;
 }
+

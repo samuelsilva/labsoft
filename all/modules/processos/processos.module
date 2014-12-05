@@ -27,7 +27,7 @@ function processos_menu() {
 		'title' => 'Processos',
 		'description' => 'Cadastro de processos',
 		'page callback' => 'drupal_get_form',
-		'page arguments' => array('_processos_cadastro_basico'),
+		'page arguments' => array('processos_basico'),
 		'access arguments' => array('access content'),
 	);
 	
@@ -55,8 +55,86 @@ function processos_menu() {
 	return $items;
 }
 
-function _processos_cadastro_basico() {
+function renderiza_cadastro($variable_type){
+	
+	switch ($variable_type) {
+		case 0:
+			$table = 'cadastros_acao';
+			//drupal_set_message('Ação!','warning');
+			break;
+		case 1:
+			$table = 'cadastros_comarcas';
+			//drupal_set_message('Comarcas!','warning');
+			break;
+		case 2:
+			$table = 'cadastros_conta';
+			break;
+	   case 3:
+			$table = 'cadastros_exito';
+			break;
+	   case 4:
+			$table = 'cadastros_fase';
+			break;
+	   case 5:
+			$table = 'cadastros_natureza';
+			break;
+	   case 6:
+			$table = 'cadastros_regional';
+			break;
+	   case 7:
+			$table = 'cadastros_recursos';
+			break;
+	   case 8:
+			$table = 'cadastros_tribunal';
+			break;
+	   case 9:
+			$table = 'cadastros_varas';
+			break;
+	}
+
+	$query = 'select cv.id, cv.nome from '.$table.' cv';
+	$rows = db_query($query);
+	
+	
+	$output  = '<div id="main">';
+    $output .= '<div id="post-content">';
+	
+	$output .= '<table class="zebra_table">';
+	$output .= '<tr><td>id</td><td>Nome</td></tr>';
+	
+	foreach($rows as $rec => $value)
+	{
+		//visualizar a montagem do $new;
+		$output .= '<tr><td>'.$value->id.'</td><td>'.$value->nome.'</td></tr>';
+		//drupal_set_message(dpr(),'warning');
+	}
+	$output .= '</table>';
+    $output .= '</div></div>';
+    
+    return $output;
+    //return $new;
+	/*
+	if($rows){
+		$output = '<table class="table" id="lines-list"><tr>';
+		$i = $colNumber = 1;
+		//while ($row = db_fetch_object($rows)) :
+		drupal_set_message(dpr($rows),'status');
+		//	if (!$row->nid && !$row->children) continue;
+	}			
+	*/
+	
+}
+
+
+function processos_basico() {
+	$form = array();
 	//redirecionar pro node de escolha de processos
+	//$act = renderiza_cadastro(9);
+	return $form;
+	//global $attributes_array;
+	//drupal_set_message(dpr($page),'status');
+	//print render($page['processos']);
+
 }
 
 function _processos_cadastro_corrente() {
@@ -447,4 +525,15 @@ function _processos_cadastro_arquivado() {
 	
 	$form['#submit'][] = '_processos_arquivados_settings_submit';
 	return $form;
+}
+
+function processos_preprocess_page(&$variables){
+
+//	drupal_set_message(dpr($variables['node']),'warning');
+	
+    //if(isset($variables['node']) && $variables['node']->your_field_name[LANGUAGE_NONE][0]['value']=='some_value') {
+        $variables['theme_hook_suggestions'][] = 'page__processos__basico';
+    //}
+ //   	drupal_set_message(dpr($variables),'warning');
+//    	print drupal_render($page['processos']);
 }

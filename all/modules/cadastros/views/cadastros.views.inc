@@ -2,9 +2,9 @@
 /**
 * Implements hook_views_api().
 */
-/*
+
 function cadastros_views_api() {
-  return array(
+/*  return array(
     'api' => 3,
     'path' => drupal_get_path('module', 'cadastros') . '/views',
   );

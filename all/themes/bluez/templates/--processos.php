@@ -67,17 +67,17 @@
         <a class="menu-button" title="Cadastre os dados dos clientes nesta parte do sistema" href="<?php echo $base_path; ?>"><img class="icon" src="<?php echo $base_path.'/'.drupal_get_path('theme', $GLOBALS['theme']); ?>/images/search.png"><br/>Pesquisar</a>
     <?php
       ////  imprimir menu da pagina inicial
-      $menu = menu_navigation_links('menu-selecao-de-campos');
-      print theme('links',array('links' => $menu)); 
+      //$menu = menu_navigation_links('menu-selecao-de-campos');
+      //print theme('links',array('links' => $menu)); 
     ?> 	  
-      <?php  if ($page['content_top']): ?><div id="content_top"><?php print render($page['content_top']); ?></div><?php endif; ?>
+      <?php /* if ($page['content_top']): ?><div id="content_top"><?php print render($page['content_top']); ?></div><?php endif; ?>
       <?php print render($title_prefix); ?>
       <?php if ($title): ?><h1 class="page-title"><?php print $title; ?></h1><?php endif; ?>
       <?php print render($title_suffix); ?>
       <?php if (!empty($tabs['#primary'])): ?><div class="tabs-wrapper clearfix"><?php print render($tabs); ?></div><?php endif; ?>
       <?php print render($page['help']); ?>
       <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
-      <?php print render($page['content']); ?>
+      <?php print render($page['content']);*/ ?>
     
 
     <!-- navigation START -->

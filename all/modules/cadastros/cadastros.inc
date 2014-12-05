@@ -172,8 +172,9 @@ function _cadastros_client_settings_submit($form,&$form_state){
 }
 
 
-function renderiza_cadastro($variable_type){
-	switch ($variable_type) {
+function renderiza_cadastro_teste($variable_type){
+
+	switch ($variable_type){
 		case 0:
 			$table = 'cadastros_acao';
 			//drupal_set_message('Ação!','warning');
@@ -208,9 +209,9 @@ function renderiza_cadastro($variable_type){
 			break;
 	}
 
-	$query = 'select cv.id, cv.nome from '.$table.' cv';
-	$rows = db_query($query);
-	
+	//$query = 'select cv.id, cv.nome from '.$table.' cv';
+	//$rows = db_query($query);
+	/*
 	if($rows){
 		$output = '<table class="table" id="lines-list"><tr>';
 		$i = $colNumber = 1;
@@ -218,6 +219,7 @@ function renderiza_cadastro($variable_type){
 		drupal_set_message(dpr($row),'status');
 		//	if (!$row->nid && !$row->children) continue;
 	}			
-		
+		*/
 	
 }
+
