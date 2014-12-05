@@ -1,28 +1,287 @@
 <?php 
 
 function processos_schema(){
-	/*
-	$schema['projetos'] = array(
-		'description' => 'Tabela dos projetos.',
+	//Criação das tabelas de processos
+		$schema['processos_correntes'] = array(
+		'description' => 'Tabela de cadastro de processos.',
 		'fields' => array(
-		  'projeto_id' => array(
-			'description' => 'Id do projeto.',
+		  //ETAPA DADOS PROCESSUAIS
+		  'id' => array(
+			'description' => 'id dos clientes.',
 			'type' => 'serial',
 			'unsigned' => TRUE,
 			'not null' => TRUE,
 		  ),
-		  'projetos_nome' => array(
-			'description' => 'Nome do projeto.',
+		  'processo' => array(
+			'description' => 'Nome do processo.',
 			'type' => 'varchar',
 			'length' => 255,
 			'not null' => TRUE,
 			'default' => '',
 		  ),
+		  'data_inicio' => array(
+			'description' => 'Data de Início do Processo.',
+			'type' => 'int',
+			'length' => 20,
+			'not null' => TRUE,
+			'default' => 0,
+		  ),
+		  'valor' => array(
+			'description' => 'Valor.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+		  'pasta' => array(
+			'description' => 'Nome da pasta.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+		  'subpasta' => array(
+			'description' => 'Nome da subpasta.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+		  'regional' => array(
+			'description' => 'Número do Regional.', 
+			'type' => 'int',
+			'length' => 44,
+			'not null' => FALSE,
+		  ),		  
+		  'natureza' => array(
+			'description' => 'Número da Natureza.', 
+			'type' => 'int',
+			'length' => 44,
+			'not null' => FALSE,
+		  ),		  
+		  'acao' => array(
+			'description' => 'Número da Ação.', 
+			'type' => 'int',
+			'length' => 44,
+			'not null' => FALSE,
+		  ),		  
+		  'fase' => array(
+			'description' => 'Número da Fase.', 
+			'type' => 'int',
+			'length' => 44,
+			'not null' => FALSE,
+		  ),		  
+		  'comarca' => array(
+			'description' => 'Número da Comarca.', 
+			'type' => 'int',
+			'length' => 44,
+			'not null' => FALSE,
+		  ),		  
+		  'vara' => array(
+			'description' => 'Número da Vara.', 
+			'type' => 'int',
+			'length' => 44,
+			'not null' => FALSE,
+		  ),		  
+		  'exito' => array(
+			'description' => 'Número do exito.', 
+			'type' => 'int',
+			'length' => 44,
+			'not null' => FALSE,
+		  ),		  
+  		  //ETAPA DADOS CLIENTE
+		  'cliente' => array(
+			'description' => 'Número do cliente.', 
+			'type' => 'int',
+			'length' => 44,
+			'not null' => FALSE,
+		  ),
+		  'valor_cliente' => array(
+			'description' => 'Valor Cliente.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+		  'advogado_cliente' => array(
+			'description' => 'Advogado Cliente.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+  		  //ETAPA DADOS ADVERSO		  
+		  'adverso' => array(
+			'description' => 'Adverso.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+		  'valor_adverso' => array(
+			'description' => 'Valor Cliente.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+		  'advogado_adverso' => array(
+			'description' => 'Advogado Cliente.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+		 ),
+	    'unique keys' => array(
+			'id' => array('id'),
 		),
-		'unique keys' => array(
-		'projeto_id' => array('projeto_id'),
-		),
-		'primary key' => array('projeto_id'),
+		'primary key' => array('id'),
 	);
-	*/
+	
+		$schema['processos_arquivados'] = array(
+		'description' => 'Tabela de cadastro de processos.',
+		'fields' => array(
+		  //ETAPA DADOS PROCESSUAIS
+		  'id' => array(
+			'description' => 'id dos clientes.',
+			'type' => 'serial',
+			'unsigned' => TRUE,
+			'not null' => TRUE,
+		  ),
+		  'processo' => array(
+			'description' => 'Nome do processo.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+		  'data_inicio' => array(
+			'description' => 'Data de Início do Processo.',
+			'type' => 'int',
+			'length' => 20,
+			'not null' => TRUE,
+			'default' => 0,
+		  ),
+		  'data_arquivamento' => array(
+			'description' => 'Data de Início do Processo.',
+			'type' => 'int',
+			'length' => 20,
+			'not null' => TRUE,
+			'default' => 0,
+		  ),
+		  'valor' => array(
+			'description' => 'Valor.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+		  'pasta' => array(
+			'description' => 'Nome da pasta.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+		  'subpasta' => array(
+			'description' => 'Nome da subpasta.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+		  'regional' => array(
+			'description' => 'Número do Regional.', 
+			'type' => 'int',
+			'length' => 44,
+			'not null' => FALSE,
+		  ),		  
+		  'natureza' => array(
+			'description' => 'Número da Natureza.', 
+			'type' => 'int',
+			'length' => 44,
+			'not null' => FALSE,
+		  ),		  
+		  'acao' => array(
+			'description' => 'Número da Ação.', 
+			'type' => 'int',
+			'length' => 44,
+			'not null' => FALSE,
+		  ),		  
+		  'fase' => array(
+			'description' => 'Número da Fase.', 
+			'type' => 'int',
+			'length' => 44,
+			'not null' => FALSE,
+		  ),		  
+		  'comarca' => array(
+			'description' => 'Número da Comarca.', 
+			'type' => 'int',
+			'length' => 44,
+			'not null' => FALSE,
+		  ),		  
+		  'vara' => array(
+			'description' => 'Número da Vara.', 
+			'type' => 'int',
+			'length' => 44,
+			'not null' => FALSE,
+		  ),		  
+		  'exito' => array(
+			'description' => 'Número do exito.', 
+			'type' => 'int',
+			'length' => 44,
+			'not null' => FALSE,
+		  ),		  
+  		  //ETAPA DADOS CLIENTE
+		  'cliente' => array(
+			'description' => 'Número do cliente.', 
+			'type' => 'int',
+			'length' => 44,
+			'not null' => FALSE,
+		  ),
+		  'valor_cliente' => array(
+			'description' => 'Valor Cliente.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+		  'advogado_cliente' => array(
+			'description' => 'Advogado Cliente.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+  		  //ETAPA DADOS ADVERSO		  
+		  'adverso' => array(
+			'description' => 'Adverso.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+		  'valor_adverso' => array(
+			'description' => 'Valor Cliente.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+		  'advogado_adverso' => array(
+			'description' => 'Advogado Cliente.',
+			'type' => 'varchar',
+			'length' => 255,
+			'not null' => TRUE,
+			'default' => '',
+		  ),
+		 ),
+	    'unique keys' => array(
+			'id' => array('id'),
+		),
+		'primary key' => array('id'),
+	);
+
+	return $schema;	
 }

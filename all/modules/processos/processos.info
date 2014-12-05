@@ -3,3 +3,6 @@ description = Módulo de processos do sistema.
 package = Juridico
 core = 7.x
 
+files[] = processos.module
+files[] = processos.install
+files[] = processos.inc
