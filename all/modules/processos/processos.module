@@ -23,7 +23,7 @@ function processos_menu() {
 	$items = array();
 	
 	//cadastro de processos
-	$items['processos/processo_basico'] = array(
+	$items['processos'] = array(
 		'title' => 'Processos',
 		'description' => 'Cadastro de processos',
 		'page callback' => 'drupal_get_form',

@@ -170,3 +170,54 @@ function _cadastros_client_settings_submit($form,&$form_state){
 	
 	drupal_write_record($table,$record);
 }
+
+
+function renderiza_cadastro($variable_type){
+	switch ($variable_type) {
+		case 0:
+			$table = 'cadastros_acao';
+			//drupal_set_message('Ação!','warning');
+			break;
+		case 1:
+			$table = 'cadastros_comarcas';
+			//drupal_set_message('Comarcas!','warning');
+			break;
+		case 2:
+			$table = 'cadastros_conta';
+			break;
+	   case 3:
+			$table = 'cadastros_exito';
+			break;
+	   case 4:
+			$table = 'cadastros_fase';
+			break;
+	   case 5:
+			$table = 'cadastros_natureza';
+			break;
+	   case 6:
+			$table = 'cadastros_regional';
+			break;
+	   case 7:
+			$table = 'cadastros_recursos';
+			break;
+	   case 8:
+			$table = 'cadastros_tribunal';
+			break;
+	   case 9:
+			$table = 'cadastros_varas';
+			break;
+	}
+
+	$query = 'select cv.id, cv.nome from '.$table.' cv';
+	$rows = db_query($query);
+	
+	if($rows){
+		$output = '<table class="table" id="lines-list"><tr>';
+		$i = $colNumber = 1;
+		//while ($row = db_fetch_object($rows)) :
+		drupal_set_message(dpr($row),'status');
+		//	if (!$row->nid && !$row->children) continue;
+	}			
+		
+	
+}
