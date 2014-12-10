@@ -16,7 +16,9 @@ function _cadastros_vara_settings_submit($form,&$form_state){
 		'nome' => $form_state['values']['nome'],
 	);
 	
-	drupal_write_record($table,$record);
+	if(drupal_write_record($table,$record)){
+		drupal_set_message('Inserido com sucesso','status');
+	}
 }
 
 function _cadastros_comarca_settings_submit($form,&$form_state){
@@ -26,7 +28,9 @@ function _cadastros_comarca_settings_submit($form,&$form_state){
 		'nome' => $form_state['values']['nome'],
 	);
 	
-	drupal_write_record($table,$record);
+	if(drupal_write_record($table,$record)){
+		drupal_set_message('Inserido com sucesso','status');
+	}
 }
 
 function _cadastros_natureza_settings_submit($form,&$form_state){
@@ -36,7 +40,9 @@ function _cadastros_natureza_settings_submit($form,&$form_state){
 		'nome' => $form_state['values']['nome'],
 	);
 	
-	drupal_write_record($table,$record);
+	if(drupal_write_record($table,$record)){
+		drupal_set_message('Inserido com sucesso','status');
+	}
 }
 
 function _cadastros_tribunais_settings_submit($form,&$form_state){
@@ -46,7 +52,9 @@ function _cadastros_tribunais_settings_submit($form,&$form_state){
 		'nome' => $form_state['values']['nome'],
 	);
 	
-	drupal_write_record($table,$record);
+	if(drupal_write_record($table,$record)){
+		drupal_set_message('Inserido com sucesso','status');
+	}
 }
 
 function _cadastros_acao_settings_submit($form,&$form_state){
@@ -56,7 +64,9 @@ function _cadastros_acao_settings_submit($form,&$form_state){
 		'nome' => $form_state['values']['nome'],
 	);
 	
-	drupal_write_record($table,$record);
+	if(drupal_write_record($table,$record)){
+		drupal_set_message('Inserido com sucesso','status');
+	}
 }
 
 function _cadastros_conta_settings_submit($form,&$form_state){
@@ -66,7 +76,9 @@ function _cadastros_conta_settings_submit($form,&$form_state){
 		'nome' => $form_state['values']['nome'],
 	);
 	
-	drupal_write_record($table,$record);
+	if(drupal_write_record($table,$record)){
+		drupal_set_message('Inserido com sucesso','status');
+	}
 }
 
 function _cadastros_regional_settings_submit($form,&$form_state){
@@ -76,7 +88,9 @@ function _cadastros_regional_settings_submit($form,&$form_state){
 		'nome' => $form_state['values']['nome'],
 	);
 	
-	drupal_write_record($table,$record);
+	if(drupal_write_record($table,$record)){
+		drupal_set_message('Inserido com sucesso','status');
+	}
 }
 
 function _cadastros_fase_settings_submit($form,&$form_state){
@@ -86,7 +100,9 @@ function _cadastros_fase_settings_submit($form,&$form_state){
 		'nome' => $form_state['values']['nome'],
 	);
 	
-	drupal_write_record($table,$record);
+	if(drupal_write_record($table,$record)){
+		drupal_set_message('Inserido com sucesso','status');
+	}
 }
 
 function _cadastros_exito_settings_submit($form,&$form_state){
@@ -96,7 +112,9 @@ function _cadastros_exito_settings_submit($form,&$form_state){
 		'nome' => $form_state['values']['nome'],
 	);
 	
-	drupal_write_record($table,$record);
+	if(drupal_write_record($table,$record)){
+		drupal_set_message('Inserido com sucesso','status');
+	}
 }
 
 function _cadastros_recurso_settings_submit($form,&$form_state){
@@ -106,7 +124,9 @@ function _cadastros_recurso_settings_submit($form,&$form_state){
 		'nome' => $form_state['values']['nome'],
 	);
 	
-	drupal_write_record($table,$record);
+	if(drupal_write_record($table,$record)){
+		drupal_set_message('Inserido com sucesso','status');
+	}
 }
 
 
@@ -169,6 +189,7 @@ function _cadastros_client_settings_submit($form,&$form_state){
 	);
 	
 	drupal_write_record($table,$record);
+	drupal_set_message('Inserido com sucesso','status');
 }
 
 

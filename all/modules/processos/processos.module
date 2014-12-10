@@ -30,6 +30,14 @@ function processos_menu() {
 		'page arguments' => array('processos_basico'),
 		'access arguments' => array('access content'),
 	);
+
+	$items['listagem'] = array(
+		'title' => 'Listagem',
+		'description' => 'Listagem dos dados',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('listagem_basica'),
+		'access arguments' => array('access content'),
+	);
 	
 	//cadastro de processos
 	$items['processos/processo_arquivado'] = array(
@@ -96,11 +104,11 @@ function renderiza_cadastro($variable_type){
 	$rows = db_query($query);
 	
 	
-	$output  = '<div id="main">';
-    $output .= '<div id="post-content">';
+	//$output  = '<div id="main">';
+    //$output = '<div id="post-content">';
 	
-	$output .= '<table class="zebra_table">';
-	$output .= '<tr><td>id</td><td>Nome</td></tr>';
+	$output = '<table class="zebra_table">';
+	//$output .= '<tr><td>id</td><td>Nome</td></tr>';
 	
 	foreach($rows as $rec => $value)
 	{
@@ -109,7 +117,8 @@ function renderiza_cadastro($variable_type){
 		//drupal_set_message(dpr(),'warning');
 	}
 	$output .= '</table>';
-    $output .= '</div></div>';
+    //$output .= '</div>';
+    //$output .= '</div>';
     
     return $output;
     //return $new;
@@ -123,6 +132,17 @@ function renderiza_cadastro($variable_type){
 	}			
 	*/
 	
+}
+
+function listagem_basica() {
+	$form = array();
+	//redirecionar pro node de escolha de processos
+	//$act = renderiza_cadastro(9);
+	return $form;
+	//global $attributes_array;
+	//drupal_set_message(dpr($page),'status');
+	//print render($page['processos']);
+
 }
 
 
