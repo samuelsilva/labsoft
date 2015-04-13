@@ -13,6 +13,18 @@ function search_codSap($filterCodSap){
 	return array( 'result' => $result);
 }
 
+/**
+  * Implements hook_permission().
+  * Definições das permissões de uso e acesso ao módulo
+  */
+function processos_permission() {
+	return array(
+		'Liberar processos' => array(
+		'title' => t('Access module processos'),
+		'description' => t('Administração e acesso ao módulo.'),
+		),
+	);
+}
 
 
 
@@ -28,7 +40,7 @@ function processos_menu() {
 		'description' => 'Cadastro de processos',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('processos_basico'),
-		'access arguments' => array('access content'),
+		'access arguments' => array('Liberar processos'),
 	);
 
 	$items['listagem'] = array(
@@ -36,7 +48,7 @@ function processos_menu() {
 		'description' => 'Listagem dos dados',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('listagem_basica'),
-		'access arguments' => array('access content'),
+		'access arguments' => array('Liberar processos'),
 	);
 	
 	//cadastro de processos
@@ -45,7 +57,7 @@ function processos_menu() {
 		'description' => 'Cadastro de processos',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_processos_cadastro_arquivado'),
-		'access arguments' => array('access content'),
+		'access arguments' => array('Liberar processos'),
 		'file' => 'processos.inc',
 	);
 	
@@ -55,7 +67,7 @@ function processos_menu() {
 		'description' => 'Cadastro de processos',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_processos_cadastro_corrente'),
-		'access arguments' => array('access content'),
+		'access arguments' => array('Liberar processos'),
 		'file' => 'processos.inc',
 	);
 	
@@ -138,6 +150,14 @@ function listagem_basica() {
 	$form = array();
 	//redirecionar pro node de escolha de processos
 	//$act = renderiza_cadastro(9);
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	//$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());
+	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
 	return $form;
 	//global $attributes_array;
 	//drupal_set_message(dpr($page),'status');
@@ -150,6 +170,16 @@ function processos_basico() {
 	$form = array();
 	//redirecionar pro node de escolha de processos
 	//$act = renderiza_cadastro(9);
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	//$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());
+	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
+
+
 	return $form;
 	//global $attributes_array;
 	//drupal_set_message(dpr($page),'status');
@@ -318,6 +348,16 @@ function _processos_cadastro_corrente() {
 	);
 
 	$form['#submit'][] = '_processos_correntes_settings_submit';
+	
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());
+	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
+	drupal_set_message(dpr($breadcrumb),'warning');
 	return $form;
 
 
@@ -544,6 +584,17 @@ function _processos_cadastro_arquivado() {
 	);
 	
 	$form['#submit'][] = '_processos_arquivados_settings_submit';
+	
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());
+	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
+	
+	
 	return $form;
 }
 

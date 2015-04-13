@@ -122,7 +122,9 @@ function bluez_theme($existing, $type, $theme, $path) {
     'listagem_basica' => $base + array(
       'template' => 'listagem-basica',
     ),
-    
+    'juridico' => $base + array(
+      'template' => 'juridico',
+    ),
   );
 }
 
@@ -146,4 +148,6 @@ function bluez_preprocess_processos_basico(&$variables) {
 }
 
 function bluez_preprocess_listagem_basica(&$variables) {
+}
+function bluez_preprocess_juridico(&$variables) {
 }

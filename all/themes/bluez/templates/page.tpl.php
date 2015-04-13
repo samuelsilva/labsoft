@@ -106,7 +106,25 @@
     <!-- navigation START -->
     <div id="navigation" class="clearfix">
       <div id="main-menu">
-        <?php print drupal_render($main_menu_tree); ?>
+        <?php //print drupal_render($main_menu_tree); ?>
+        <?php 
+			global $user; 
+			//print $user->uid;
+			if($user->uid!=''){
+				?> 
+					<ul class="menu" class="clearfix">
+						<li class="menu">
+							<a class="active" href="/labsoft/user/logout" title>logout</a>
+							
+						</li>
+					</ul>
+				<?php
+				print('Bem vindo '.$user->name);
+				
+			}else{
+				print drupal_render($main_menu_tree);
+			} 
+		?>
       </div>
     </div>
     <!-- navigation Ends -->
@@ -131,6 +149,7 @@
   
   <div id="main">
     <div id="post-content">
+		        <?php //drupal_set_message(dpr($user),'status'); ?>
       <?php if ($page['content_top']): ?><div id="content_top"><?php print render($page['content_top']); ?></div><?php endif; ?>
       <?php print render($title_prefix); ?>
       <?php if ($title): ?><h1 class="page-title"><?php print $title; ?></h1><?php endif; ?>

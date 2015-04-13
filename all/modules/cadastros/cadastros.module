@@ -1,8 +1,23 @@
 <?php
 
 function cadastros_user_login(&$edit, $account) {
-	$edit['redirect'] = 'node/1';
+	$edit['redirect'] = 'juridico';
 }
+
+/**
+  * Implements hook_permission().
+  * Definições das permissões de uso e acesso ao módulo
+  */
+function cadastros_permission() {
+	return array(
+		'Liberar cadastros' => array(
+		'title' => t('Access module cadastros'),
+		'description' => t('Administração e acesso ao módulo.'),
+		),
+	);
+}
+
+
 
 /**
   * Implements hook_menu().
@@ -10,13 +25,21 @@ function cadastros_user_login(&$edit, $account) {
 function cadastros_menu() {
 	$items = array();
 	
+	$items['juridico'] = array(
+		'title' => 'Sistema Jurídico',
+		'description' => 'Cadastro de processos',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('juridico'),
+		'access arguments' => array('Liberar cadastros'),
+	);
+	
 	//cadastro de cliente
 	$items['cadastro/cliente'] = array(
 		'title' => 'Cadastro de Cliente',
 		'description' => 'Cadastre aqui o cliente',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_cadastros_cadastro_client'),
-		'access arguments' => array('access content'),
+		'access arguments' => array('Liberar cadastros'),
 		'file' => 'cadastros.inc',
 	);
 	
@@ -26,7 +49,7 @@ function cadastros_menu() {
 		'description' => 'Cadastre aqui as varas judiciais',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_cadastros_cadastro_vara'),
-		'access arguments' => array('access content'),
+		'access arguments' => array('Liberar cadastros'),
 		'file' => 'cadastros.inc',
 	);
 	
@@ -36,7 +59,7 @@ function cadastros_menu() {
 		'description' => 'Cadastre aqui as comarcas',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_cadastros_cadastro_comarca'),
-		'access arguments' => array('access content'),
+		'access arguments' => array('Liberar cadastros'),
 		'file' => 'cadastros.inc',
 	);
 	
@@ -46,7 +69,7 @@ function cadastros_menu() {
 		'description' => 'Cadastre aqui a natureza do processo',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_cadastros_cadastro_natureza'),
-		'access arguments' => array('access content'),
+		'access arguments' => array('Liberar cadastros'),
 		'file' => 'cadastros.inc',
 	);
 	
@@ -56,7 +79,7 @@ function cadastros_menu() {
 		'description' => 'Cadastre aqui os tribunais',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_cadastros_cadastro_tribunais'),
-		'access arguments' => array('access content'),
+		'access arguments' => array('Liberar cadastros'),
 		'file' => 'cadastros.inc',
 	);
 
@@ -66,7 +89,7 @@ function cadastros_menu() {
 		'description' => 'Cadastre aqui as os tipos de ação',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_cadastros_cadastro_acao'),
-		'access arguments' => array('access content'),
+		'access arguments' => array('Liberar cadastros'),
 		'file' => 'cadastros.inc',
 	);
 
@@ -76,7 +99,7 @@ function cadastros_menu() {
 		'description' => 'Cadastre aqui os tipos de conta',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_cadastros_cadastro_conta'),
-		'access arguments' => array('access content'),
+		'access arguments' => array('Liberar cadastros'),
 		'file' => 'cadastros.inc',
 	);
 
@@ -86,7 +109,7 @@ function cadastros_menu() {
 		'description' => 'Cadastre aqui as Fases Processuais',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_cadastros_cadastro_fase_processual'),
-		'access arguments' => array('access content'),
+		'access arguments' => array('Liberar cadastros'),
 		'file' => 'cadastros.inc',
 	);
 
@@ -96,7 +119,7 @@ function cadastros_menu() {
 		'description' => 'Cadastre aqui a Regional/Sucursal',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_cadastros_cadastro_regional'),
-		'access arguments' => array('access content'),
+		'access arguments' => array('Liberar cadastros'),
 		'file' => 'cadastros.inc',
 	);
 
@@ -106,7 +129,7 @@ function cadastros_menu() {
 		'description' => 'Cadastre aqui o Recurso(tribunal)',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_cadastros_cadastro_recurso'),
-		'access arguments' => array('access content'),
+		'access arguments' => array('Liberar cadastros'),
 		'file' => 'cadastros.inc',
 	);
 
@@ -116,7 +139,7 @@ function cadastros_menu() {
 		'description' => 'Cadastre aqui a possibilidade de êxito',
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('_cadastros_cadastro_possibilidade_exito'),
-		'access arguments' => array('access content'),
+		'access arguments' => array('Liberar cadastros'),
 		'file' => 'cadastros.inc',
 	);
 
@@ -124,6 +147,16 @@ function cadastros_menu() {
 	return $items;
 }
 
+function juridico() {
+	$form = array();
+	//redirecionar pro node de escolha de processos
+	//$act = renderiza_cadastro(9);
+	return $form;
+	//global $attributes_array;
+	//drupal_set_message(dpr($page),'status');
+	//print render($page['processos']);
+
+}
 
 function _cadastros_cadastro_client() {
 	$form = array();
@@ -429,6 +462,15 @@ function _cadastros_cadastro_client() {
 	);
 	
 		$form['#submit'][] = '_cadastros_client_settings_submit';
+
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	//$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
+
 	return $form;
 }
 
@@ -448,6 +490,13 @@ function _cadastros_cadastro_vara() {
 	);
 	
 	$form['#submit'][] = '_cadastros_vara_settings_submit';
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	//$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
 	
 	return $form;
 }
@@ -466,6 +515,13 @@ function _cadastros_cadastro_comarca() {
 		'#value' => 'Enviar',
 		'#required' => true
 	);
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	//$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
 	
 	$form['#submit'][] = '_cadastros_comarca_settings_submit';
 	return $form;
@@ -487,6 +543,13 @@ function _cadastros_cadastro_natureza() {
 	);
 	
 	$form['#submit'][] = '_cadastros_natureza_settings_submit';
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	//$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
 	return $form;
 }
 
@@ -506,6 +569,13 @@ function _cadastros_cadastro_tribunais() {
 	);
 	
 	$form['#submit'][] = '_cadastros_tribunais_settings_submit';
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	//$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
 	return $form;
 }
 
@@ -525,6 +595,13 @@ function _cadastros_cadastro_acao() {
 	);
 	
 	$form['#submit'][] = '_cadastros_acao_settings_submit';
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	//$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
 	return $form;
 }
 
@@ -544,6 +621,13 @@ function _cadastros_cadastro_conta() {
 	);
 	
 	$form['#submit'][] = '_cadastros_conta_settings_submit';
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	//$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
 	return $form;
 }
 
@@ -563,6 +647,13 @@ function _cadastros_cadastro_regional() {
 	);
 	
 	$form['#submit'][] = '_cadastros_regional_settings_submit';
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	//$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
 	return $form;
 }
 
@@ -582,6 +673,13 @@ function _cadastros_cadastro_fase_processual() {
 	);
 	
 	$form['#submit'][] = '_cadastros_fase_settings_submit';
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	//$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
 	return $form;
 }
 
@@ -601,6 +699,13 @@ function _cadastros_cadastro_recurso() {
 	);
 	
 	$form['#submit'][] = '_cadastros_recurso_settings_submit';
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	//$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
 	return $form;
 }
 
@@ -620,6 +725,13 @@ function _cadastros_cadastro_possibilidade_exito() {
 	);
 	
 	$form['#submit'][] = '_cadastros_exito_settings_submit';
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	//$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
 	return $form;
 }
 
