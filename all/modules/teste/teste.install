@@ -1,5 +1,5 @@
 <?php 
-
+/*
 function teste_schema(){
 	
 	$schema['projetos'] = array(
@@ -51,7 +51,7 @@ function teste_schema(){
 
 	return $schema;
 }
-
+*/
 /*
 function teste_install() {
   //Create my tables

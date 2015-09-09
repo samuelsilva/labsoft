@@ -4,6 +4,90 @@
   * Implements hook_menu().
   */
   
+function teste_menu()
+{
+	$items = array();
+	
+    $items['meu-formulario'] = array(
+		'title' => 'Meu formulario' ,
+		'description' => t('Meu Primeiro Formulario') ,
+		'page callback' => '_meu_formulario', //funcao que irá chamar o formulario
+		'access arguments' => array('access content') ,
+		'type' => MENU_CALLBACK,
+  );
+
+  return $items;  
+  
+  
+ } 
+ 
+function _meu_formulario()
+{
+  $output = drupal_get_form('estrutura_do_formulario');
+ 
+  return $output;
+}
+
+
+function estrutura_do_formulario(){
+  module_load_include('inc', 'popup', '/includes/popup.api');
+  /*
+  $form['description'] = array(
+    '#type' => 'item',
+    '#title' => t('Meu Formulario'),
+  );
+ 
+  $form['campo_checkbox'] = array(
+      '#title' => t('Meu campo'),
+      '#type' => 'checkbox',
+      '#return_value' => 1, 
+      '#default_value' => 1,
+  );
+ */
+  $form['nome'] = array(
+      '#title' => t('Outro campo:'),
+      '#type' => 'textfield',
+      //'#field_suffix' => l('px'),
+      //'#field_suffix' => popup(array('form' => 'search_form', 'activate' => 'click', 'width' => 350)),
+      '#field_suffix' => popup(array('form' => 'search_form', 'activate' => 'click','close' => TRUE, 'width' => 450)),
+  );
+ 
+ 
+  $form['submit'] = array('#type' => 'submit', '#value' => t('Submit'), '#weight' => 1,
+               '#ajax' => array(
+                'callback' => 'meu_form_submit_callback', //Função do Submit
+                'wrapper' => 'codigo-ajax', //Id onde será exibido a Mensagem.
+                'effect' => 'fade',),);
+ 
+ $form['body']['#prefix'] = '<div id="codigo-ajax">'; //Div onde será exibida a Mensagem
+ $form['body']['#suffix'] = '</div>';
+ 
+ return $form;
+}
+ 
+//Função do Submit Ajax
+function meu_form_submit_callback($form, &$form_state){
+	$table = 'cadastros_varas';
+	
+	$record = array(
+		'nome' => $form_state['values']['nome'],
+	);
+	
+	if(drupal_write_record($table,$record)){
+		drupal_set_message('Inserido com sucesso','status');
+		$output = "Inserido no banco com sucesso!";
+		return "<div id='codigo-ajax'> $output </div>";
+		}
+	else{
+		return 0;
+	}
+ 
+	//$output = "Mensagem de exibição!";
+	$output = "Inserido no banco com sucesso!";
+	return "<div id='codigo-ajax'> $output </div>";
+}
+
+/*  
 function teste_menu() {
 
 
@@ -229,3 +313,4 @@ function _teste_cadastros_client() {
 	return $form;
 }
 
+*/

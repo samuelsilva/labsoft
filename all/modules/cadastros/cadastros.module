@@ -142,10 +142,83 @@ function cadastros_menu() {
 		'access arguments' => array('Liberar cadastros'),
 		'file' => 'cadastros.inc',
 	);
-
+/*
+    $items['cadastro/teste_ajax'] = array(
+		'title' => 'Meu formulario' ,
+		'description' => t('Meu Primeiro Formulario') ,
+		'page callback' => '_meu_formulario', //funcao que irá chamar o formulario
+		'access arguments' => array('access content') ,
+		'type' => MENU_CALLBACK,
+	);
+*/
+    $items['cadastro/teste_ajax'] = array(
+		'title' => 'Meu formulario' ,
+		'description' => t('Meu Primeiro Formulario') ,
+		'page callback' => 'drupal_get_form', //funcao que irá chamar o formulario
+		'access arguments' => array('Teste ajax') ,
+		'page arguments' => array('estrutura_do_formulario'),
+		'type' => MENU_CALLBACK,
+	);
 	
 	return $items;
 }
+
+/******************  TESTE AJAX ********************/
+/*
+function _meu_formulario()
+{
+  $output = drupal_get_form('estrutura_do_formulario');
+ 
+  return $output;
+
+}
+
+
+function estrutura_do_formulario(){
+  
+  $form['description'] = array(
+    '#type' => 'item',
+    '#title' => t('Meu Formulario'),
+  );
+ 
+  $form['campo_checkbox'] = array(
+      '#title' => t('Meu campo'),
+      '#type' => 'checkbox',
+      '#return_value' => 1, 
+      '#default_value' => 1,
+  );
+ 
+  $form['campo_textfield'] = array(
+      '#title' => t('Outro campo:'),
+      '#type' => 'textfield',
+      '#field_suffix' => 'px',
+      '#size' => 4,
+      '#maxlength' => 5,
+      '#default_value' => '960',
+  );
+ 
+ 
+  $form['submit'] = array('#type' => 'submit', '#value' => t('Submit'), '#weight' => 1,
+               '#ajax' => array(
+                'callback' => 'meu_form_submit_callback', //Função do Submit
+                'wrapper' => 'codigo-ajax', //Id onde será exibido a Mensagem.
+                'effect' => 'fade',),);
+ 
+ $form['body']['#prefix'] = '<div id="codigo-ajax">'; //Div onde será exibida a Mensagem
+ $form['body']['#suffix'] = '</div>';
+ 
+ return $form;
+}
+ 
+//Função do Submit Ajax
+function meu_form_submit_callback($form, &$form_state){
+ 
+  $output = "Mensagem de exibição!";
+ 
+  return "<div id='codigo-ajax'> $output </div>";
+}
+*/
+/**************************************/
 
 function juridico() {
 	$form = array();
@@ -274,7 +347,17 @@ function _cadastros_cadastro_client() {
 		'#title' => 'Profissão',
 		'#required' => false
 	);	
-	
+	/*
+	$form['outros']['PIS'] = array(
+		popup(array('view' => 'frontpage', 'activate' => 'click', 'width' => 500)),
+	);
+
+	$form['outros']['PIS'] = array(
+		'#type' => 'textfield',
+		'#title' => 	popup(array('view' => 'frontpage', 'activate' => 'click', 'width' => 500)),
+		'#required' => false
+	);
+	*/
 	$form['outros']['num_ct'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Número da CT',
@@ -480,14 +563,23 @@ function _cadastros_cadastro_vara() {
 	$form['nome'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Nome da Vara',
+		'#required' => true,
+		'#field_suffix' => l('px'),
+	);
+	/*
+	$form['texto'] = array(
+		'#type' => 'textfield',
+		'#title' => 'test itens',
 		'#required' => true
 	);
-	
+	*/
 	$form['enviar'] = array(
 		'#type' => 'submit',
 		'#value' => 'Enviar',
 		'#required' => true
 	);
+	
+	
 	
 	$form['#submit'][] = '_cadastros_vara_settings_submit';
 	$breadcrumb = array();
@@ -517,7 +609,7 @@ function _cadastros_cadastro_comarca() {
 	);
 	$breadcrumb = array();
 	$breadcrumb[] = l('Home',base_path());
-	$breadcrumb[] = l('Juridico','juridico');
+	$breadcrumb[] = l('Comarca','/comarcas');
 	//$breadcrumb[] = l('Processos',base_path().'processos');
 	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());	
 	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
