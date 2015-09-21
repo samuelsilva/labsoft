@@ -1,5 +1,28 @@
 <?php
 
+//redirecionamento do login
+//function cadastros_user_login(&$edit, $account) {
+/*function teste_user_login(&$edit, $account) {
+	$edit['redirect'] = 'juridico';
+}
+*/
+
+/**
+  * Implements hook_permission().
+  * Definições das permissões de uso e acesso ao módulo
+  */
+//function cadastros_permission() {
+
+function teste_permission() {
+	return array(
+		'Liberar cadastros' => array(
+		'title' => t('Access module cadastros'),
+		'description' => t('Administração e acesso ao módulo.'),
+		),
+	);
+}
+
+
 /**
   * Implements hook_menu().
   */
@@ -7,25 +30,507 @@
 function teste_menu()
 {
 	$items = array();
+/*	
+	$items['juridico'] = array(
+		'title' => 'Sistema Jurídico',
+		'description' => 'Cadastro de processos',
+//		'page callback' => 'drupal_get_form',
+//		'page arguments' => array('juridico'),
+//		'access arguments' => array('Liberar cadastros'),
+		'page callback' => '_juridico', //funcao que irá chamar o formulario
+		'access arguments' => array('access content') ,		
+		'type' => MENU_CALLBACK,
+	);
+*/
+	
+	//cadastro de ação	
+	$items['cadastro/acao'] = array(
+		'title' => 'Cadastro de Tipo de Ação',
+		'description' => 'Cadastre aqui as os tipos de ação',
+		'page callback' => '_cadastro_acao', //funcao que irá chamar o formulario
+		'access arguments' => array('access content') ,		
+		'type' => MENU_NORMAL_ITEM,
+		//'file' => 'cadastros.inc',
+	);
+
+	//cadastro de varas
+	$items['cadastro/varas'] = array(
+		'title' => 'Cadastro de Varas',
+		'description' => 'Cadastre aqui as varas judiciais',
+		'page callback' => '_cadastro_varas', //funcao que irá chamar o formulario
+		'access arguments' => array('access content') ,		
+		'type' => MENU_NORMAL_ITEM,
+	);
 	
     $items['meu-formulario'] = array(
 		'title' => 'Meu formulario' ,
 		'description' => t('Meu Primeiro Formulario') ,
 		'page callback' => '_meu_formulario', //funcao que irá chamar o formulario
 		'access arguments' => array('access content') ,
-		'type' => MENU_CALLBACK,
-  );
+		//'type' => MENU_CALLBACK,
+		'type' => MENU_NORMAL_ITEM,
+	);
+  
+		//cadastro de comarcas
+	$items['cadastro/comarcas'] = array(
+		'title' => 'Cadastro de Comarcas',
+		'description' => 'Cadastre aqui as comarcas',
+		'page callback' => '_cadastro_comarcas', //funcao que irá chamar o formulario
+		'access arguments' => array('access content') ,		
+		'type' => MENU_NORMAL_ITEM,
+	);
+	
+	//cadastro de natureza
+	$items['cadastro/naturezas'] = array(
+		'title' => 'Cadastro de Natureza',
+		'description' => 'Cadastre aqui a natureza do processo',
+		'page callback' => '_cadastro_natureza', //funcao que irá chamar o formulario
+		'access arguments' => array('access content') ,		
+		'type' => MENU_NORMAL_ITEM,
+	);
+	
+	
+	//cadastro de tribunais
+	$items['cadastro/tribunais'] = array(
+		'title' => 'Cadastro do Tribunal',
+		'description' => 'Cadastre aqui os tribunais',
+		'page callback' => '_cadastro_tribunais', //funcao que irá chamar o formulario
+		'access arguments' => array('access content') ,		
+		'type' => MENU_NORMAL_ITEM,
+	);
+
+	
+	//cadastro de conta
+	$items['cadastro/conta'] = array(
+		'title' => 'Cadastro de Tipo de Conta',
+		'description' => 'Cadastre aqui os tipos de conta',
+		'page callback' => '_cadastro_conta', //funcao que irá chamar o formulario
+		'access arguments' => array('access content') ,		
+		'type' => MENU_NORMAL_ITEM,
+	);
+
+	//cadastro de fase processual
+	$items['cadastro/fase_processual'] = array(
+		'title' => 'Cadastro de Fase Processual',
+		'description' => 'Cadastre aqui as Fases Processuais',
+		'page callback' => '_cadastro_fase_processual', //funcao que irá chamar o formulario
+		'access arguments' => array('access content') ,		
+		'type' => MENU_NORMAL_ITEM,
+	);
+
+	//cadastro de regional/sucursal
+	$items['cadastro/regional'] = array(
+		'title' => 'Cadastro de Regional/Sucursal',
+		'description' => 'Cadastre aqui a Regional/Sucursal',
+		'page callback' => '_cadastro_regional', //funcao que irá chamar o formulario
+		'access arguments' => array('access content') ,		
+		'type' => MENU_NORMAL_ITEM,
+	);
+
+	//cadastro de Recursos(tribunais)
+	$items['cadastro/recursos'] = array(
+		'title' => 'Cadastro de Recursos',
+		'description' => 'Cadastre aqui o Recurso(tribunal)',
+		'page callback' => '_cadastro_recurso', //funcao que irá chamar o formulario
+		'access arguments' => array('access content') ,		
+		'type' => MENU_NORMAL_ITEM,
+	);
+
+	//cadastro de Possibilidade de exito
+	$items['cadastro/exito'] = array(
+		'title' => 'Cadastro de Possibilidade de Êxito',
+		'description' => 'Cadastre aqui a possibilidade de êxito',
+		'page callback' => '_cadastro_exito', //funcao que irá chamar o formulario
+		'access arguments' => array('access content') ,		
+		'type' => MENU_NORMAL_ITEM,
+	);
+  
 
   return $items;  
   
   
- } 
- 
+} 
+/*
+function _juridico()
+{
+  $output = drupal_get_form('juridico'); 
+  return $output;
+}
+
+function juridico() {
+	$form = array();
+	//redirecionar pro node de escolha de processos
+	//$act = renderiza_cadastro(9);
+	return $form;
+	//global $attributes_array;
+	//drupal_set_message(dpr($page),'status');
+	//print render($page['processos']);
+
+}
+*/
 function _meu_formulario()
 {
-  $output = drupal_get_form('estrutura_do_formulario');
- 
+  $output = drupal_get_form('estrutura_do_formulario'); 
   return $output;
+}
+
+function _cadastro_acao()
+{
+  $output = drupal_get_form('form_acao'); 
+  return $output;
+}
+
+function _cadastro_varas()
+{
+  $output = drupal_get_form('form_varas'); 
+  return $output;
+}
+
+function _cadastro_comarcas()
+{
+  $output = drupal_get_form('form_comarcas'); 
+  return $output;
+}
+
+function _cadastro_natureza()
+{
+  $output = drupal_get_form('form_natureza'); 
+  return $output;
+}
+
+function _cadastro_tribunais()
+{
+  $output = drupal_get_form('form_tribunais'); 
+  return $output;
+}
+function _cadastro_conta() {
+  $output = drupal_get_form('form_conta'); 
+  return $output;
+}
+
+function _cadastro_fase_processual() {
+  $output = drupal_get_form('form_fase_processual'); 
+  return $output;
+}
+
+function _cadastro_regional() {
+  $output = drupal_get_form('form_regiona'); 
+  return $output;
+}
+
+function _cadastro_exito() {
+  $output = drupal_get_form('form_exito'); 
+  return $output;
+}
+
+function _cadastro_recurso() {
+  $output = drupal_get_form('form_recursos'); 
+  return $output;
+}
+
+function form_conta() {
+	$form = array();
+	
+	$form['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome da Conta',
+		'#required' => true,
+	);
+	
+//	$form['#submit'][] = '_cadastros_vara_settings_submit';
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	//$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
+
+    $form['submit'] = array('#type' => 'submit', '#value' => t('Enviar'), '#weight' => 1,
+               '#ajax' => array(
+                'callback' => 'form_conta_submit_callback', //Função do Submit
+                'wrapper' => 'codigo-ajax', //Id onde será exibido a Mensagem.
+                'effect' => 'fade',),);
+ 
+ $form['body']['#prefix'] = '<div id="codigo-ajax">'; //Div onde será exibida a Mensagem
+ $form['body']['#suffix'] = '</div>';
+ 
+ return $form;
+}
+
+function form_fase_processual() {
+	$form = array();
+	
+	$form['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome da Fase Processual',
+		'#required' => true,
+	);
+	
+//	$form['#submit'][] = '_cadastros_vara_settings_submit';
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	//$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
+
+    $form['submit'] = array('#type' => 'submit', '#value' => t('Enviar'), '#weight' => 1,
+               '#ajax' => array(
+                'callback' => 'form_fase_submit_callback', //Função do Submit
+                'wrapper' => 'codigo-ajax', //Id onde será exibido a Mensagem.
+                'effect' => 'fade',),);
+ 
+ $form['body']['#prefix'] = '<div id="codigo-ajax">'; //Div onde será exibida a Mensagem
+ $form['body']['#suffix'] = '</div>';
+ 
+ return $form;
+}
+
+function form_regional() {
+	$form = array();
+	
+	$form['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome da Regional/Sucursal',
+		'#required' => true,
+	);
+	
+//	$form['#submit'][] = '_cadastros_vara_settings_submit';
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	//$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
+
+    $form['submit'] = array('#type' => 'submit', '#value' => t('Enviar'), '#weight' => 1,
+               '#ajax' => array(
+                'callback' => 'form_regional_submit_callback', //Função do Submit
+                'wrapper' => 'codigo-ajax', //Id onde será exibido a Mensagem.
+                'effect' => 'fade',),);
+ 
+ $form['body']['#prefix'] = '<div id="codigo-ajax">'; //Div onde será exibida a Mensagem
+ $form['body']['#suffix'] = '</div>';
+ 
+ return $form;
+}
+
+function form_exito() {
+	$form = array();
+	
+	$form['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome da Possibilidade de êxito',
+		'#required' => true,
+	);
+	
+//	$form['#submit'][] = '_cadastros_vara_settings_submit';
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	//$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
+
+    $form['submit'] = array('#type' => 'submit', '#value' => t('Enviar'), '#weight' => 1,
+               '#ajax' => array(
+                'callback' => 'form_exito_submit_callback', //Função do Submit
+                'wrapper' => 'codigo-ajax', //Id onde será exibido a Mensagem.
+                'effect' => 'fade',),);
+ 
+ $form['body']['#prefix'] = '<div id="codigo-ajax">'; //Div onde será exibida a Mensagem
+ $form['body']['#suffix'] = '</div>';
+ 
+ return $form;
+}
+
+function form_recursos() {
+	$form = array();
+	
+	$form['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome do Recurso',
+		'#required' => true,
+	);
+	
+//	$form['#submit'][] = '_cadastros_vara_settings_submit';
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	//$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
+
+    $form['submit'] = array('#type' => 'submit', '#value' => t('Enviar'), '#weight' => 1,
+               '#ajax' => array(
+                'callback' => 'form_recursos_submit_callback', //Função do Submit
+                'wrapper' => 'codigo-ajax', //Id onde será exibido a Mensagem.
+                'effect' => 'fade',),);
+ 
+ $form['body']['#prefix'] = '<div id="codigo-ajax">'; //Div onde será exibida a Mensagem
+ $form['body']['#suffix'] = '</div>';
+ 
+ return $form;
+}
+
+
+function form_comarcas() {
+	$form = array();
+	
+	$form['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome da Comarca',
+		'#required' => true,
+	);
+	
+//	$form['#submit'][] = '_cadastros_vara_settings_submit';
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	//$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
+
+    $form['submit'] = array('#type' => 'submit', '#value' => t('Enviar'), '#weight' => 1,
+               '#ajax' => array(
+                'callback' => 'form_comarca_submit_callback', //Função do Submit
+                'wrapper' => 'codigo-ajax', //Id onde será exibido a Mensagem.
+                'effect' => 'fade',),);
+ 
+ $form['body']['#prefix'] = '<div id="codigo-ajax">'; //Div onde será exibida a Mensagem
+ $form['body']['#suffix'] = '</div>';
+ 
+ return $form;
+}
+
+function form_natureza() {
+	$form = array();
+	
+	$form['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome da Natureza',
+		'#required' => true,
+	);
+	
+//	$form['#submit'][] = '_cadastros_vara_settings_submit';
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	//$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
+
+    $form['submit'] = array('#type' => 'submit', '#value' => t('Enviar'), '#weight' => 1,
+               '#ajax' => array(
+                'callback' => 'form_natureza_submit_callback', //Função do Submit
+                'wrapper' => 'codigo-ajax', //Id onde será exibido a Mensagem.
+                'effect' => 'fade',),);
+ 
+ $form['body']['#prefix'] = '<div id="codigo-ajax">'; //Div onde será exibida a Mensagem
+ $form['body']['#suffix'] = '</div>';
+ 
+ return $form;
+}
+
+function form_tribunais() {
+	$form = array();
+	
+	$form['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome do Tribunal',
+		'#required' => true,
+	);
+	
+//	$form['#submit'][] = '_cadastros_vara_settings_submit';
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	//$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
+
+    $form['submit'] = array('#type' => 'submit', '#value' => t('Enviar'), '#weight' => 1,
+               '#ajax' => array(
+                'callback' => 'form_tribunais_submit_callback', //Função do Submit
+                'wrapper' => 'codigo-ajax', //Id onde será exibido a Mensagem.
+                'effect' => 'fade',),);
+ 
+ $form['body']['#prefix'] = '<div id="codigo-ajax">'; //Div onde será exibida a Mensagem
+ $form['body']['#suffix'] = '</div>';
+ 
+ return $form;
+}
+
+function form_acao() {
+//	module_load_include('inc', 'popup', '/includes/popup.api');
+	$form = array();
+	
+	$form['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome do Tipo de Ação',
+		'#required' => true
+	);
+	
+	//$form['#submit'][] = '_cadastros_acao_settings_submit';
+	
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	//$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
+	
+    $form['submit'] = array('#type' => 'submit', '#value' => t('Enviar'), '#weight' => 1,
+               '#ajax' => array(
+                'callback' => 'form_acao_submit_callback', //Função do Submit
+                'wrapper' => 'codigo-ajax', //Id onde será exibido a Mensagem.
+                'effect' => 'fade',),);
+ 
+ $form['body']['#prefix'] = '<div id="codigo-ajax">'; //Div onde será exibida a Mensagem
+ $form['body']['#suffix'] = '</div>';
+ 
+ return $form;
+}
+
+
+function form_varas() {
+//	module_load_include('inc', 'popup', '/includes/popup.api');
+	$form = array();
+	
+	$form['nome'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Nome da Vara',
+		'#required' => true,
+	);
+	
+//	$form['#submit'][] = '_cadastros_vara_settings_submit';
+	$breadcrumb = array();
+	$breadcrumb[] = l('Home',base_path());
+	$breadcrumb[] = l('Juridico','juridico');
+	//$breadcrumb[] = l('Processos',base_path().'processos');
+	//$breadcrumb[] = l(drupal_get_title(),base_path() . request_uri());	
+	//$breadcrumb[] = l('Processo Corrente','processos/processo_corrente');
+	drupal_set_breadcrumb($breadcrumb);
+
+    $form['submit'] = array('#type' => 'submit', '#value' => t('Enviar'), '#weight' => 1,
+               '#ajax' => array(
+                'callback' => 'form_varas_submit_callback', //Função do Submit
+                'wrapper' => 'codigo-ajax', //Id onde será exibido a Mensagem.
+                'effect' => 'fade',),);
+ 
+ $form['body']['#prefix'] = '<div id="codigo-ajax">'; //Div onde será exibida a Mensagem
+ $form['body']['#suffix'] = '</div>';
+ 
+ return $form;
 }
 
 
@@ -65,7 +570,231 @@ function estrutura_do_formulario(){
  return $form;
 }
  
-//Função do Submit Ajax
+ 
+ 
+//Funções de Submit Ajax
+
+//regional
+function form_regional_submit_callback($form, &$form_state){
+	$table = 'cadastros_regional';
+	
+	$record = array(
+		'nome' => $form_state['values']['nome'],
+	);
+	
+	if(drupal_write_record($table,$record)){
+		drupal_set_message('Inserido com sucesso','status');
+		$output = "Inserido no banco com sucesso!";
+		return "<div id='codigo-ajax'> $output </div>";
+		}
+	else{
+		return 0;
+	}
+ 
+	//$output = "Mensagem de exibição!";
+	$output = "Inserido no banco com sucesso!";
+	return "<div id='codigo-ajax'> $output </div>";
+}
+
+//conta
+function form_conta_submit_callback($form, &$form_state){
+	$table = 'cadastros_conta';
+	
+	$record = array(
+		'nome' => $form_state['values']['nome'],
+	);
+	
+	if(drupal_write_record($table,$record)){
+		drupal_set_message('Inserido com sucesso','status');
+		$output = "Inserido no banco com sucesso!";
+		return "<div id='codigo-ajax'> $output </div>";
+		}
+	else{
+		return 0;
+	}
+ 
+	//$output = "Mensagem de exibição!";
+	$output = "Inserido no banco com sucesso!";
+	return "<div id='codigo-ajax'> $output </div>";
+}
+
+//fase
+function form_fase_submit_callback($form, &$form_state){
+	$table = 'cadastros_fase';
+	
+	$record = array(
+		'nome' => $form_state['values']['nome'],
+	);
+	
+	if(drupal_write_record($table,$record)){
+		drupal_set_message('Inserido com sucesso','status');
+		$output = "Inserido no banco com sucesso!";
+		return "<div id='codigo-ajax'> $output </div>";
+		}
+	else{
+		return 0;
+	}
+ 
+	//$output = "Mensagem de exibição!";
+	$output = "Inserido no banco com sucesso!";
+	return "<div id='codigo-ajax'> $output </div>";
+}
+
+//exito
+function form_exito_submit_callback($form, &$form_state){
+	$table = 'cadastros_exito';
+	
+	$record = array(
+		'nome' => $form_state['values']['nome'],
+	);
+	
+	if(drupal_write_record($table,$record)) {
+		drupal_set_message('Inserido com sucesso','status');
+		$output = "Inserido no banco com sucesso!";
+		return "<div id='codigo-ajax'> $output </div>";
+	}
+	else {
+		return 0;
+	}
+ 
+	//$output = "Mensagem de exibição!";
+	$output = "Inserido no banco com sucesso!";
+	return "<div id='codigo-ajax'> $output </div>";
+}
+
+//recurso
+function form_recursos_submit_callback($form, &$form_state){
+	$table = 'cadastros_recursos';
+	
+	$record = array(
+		'nome' => $form_state['values']['nome'],
+	);
+	
+	if(drupal_write_record($table,$record)){
+		drupal_set_message('Inserido com sucesso','status');
+		$output = "Inserido no banco com sucesso!";
+		return "<div id='codigo-ajax'> $output </div>";
+		}
+	else{
+		return 0;
+	}
+ 
+	//$output = "Mensagem de exibição!";
+	$output = "Inserido no banco com sucesso!";
+	return "<div id='codigo-ajax'> $output </div>";
+}
+
+//ação
+function form_acao_submit_callback($form, &$form_state){
+	$table = 'cadastros_acao';
+	
+	$record = array(
+		'nome' => $form_state['values']['nome'],
+	);
+	
+	if(drupal_write_record($table,$record)){
+		drupal_set_message('Inserido com sucesso','status');
+		$output = "Inserido no banco com sucesso!";
+		return "<div id='codigo-ajax'> $output </div>";
+		}
+	else{
+		return 0;
+	}
+ 
+	//$output = "Mensagem de exibição!";
+	$output = "Inserido no banco com sucesso!";
+	return "<div id='codigo-ajax'> $output </div>";
+}
+
+//comarca
+function form_comarca_submit_callback($form, &$form_state){
+	$table = 'cadastros_comarcas';
+	
+	$record = array(
+		'nome' => $form_state['values']['nome'],
+	);
+	
+	if(drupal_write_record($table,$record)){
+		drupal_set_message('Inserido com sucesso','status');
+		$output = "Inserido no banco com sucesso!";
+		return "<div id='codigo-ajax'> $output </div>";
+		}
+	else{
+		return 0;
+	}
+ 
+	//$output = "Mensagem de exibição!";
+	$output = "Inserido no banco com sucesso!";
+	return "<div id='codigo-ajax'> $output </div>";
+}
+
+//natureza
+function form_natureza_submit_callback($form, &$form_state){
+	$table = 'cadastros_natureza';
+	
+	$record = array(
+		'nome' => $form_state['values']['nome'],
+	);
+	
+	if(drupal_write_record($table,$record)){
+		drupal_set_message('Inserido com sucesso','status');
+		$output = "Inserido no banco com sucesso!";
+		return "<div id='codigo-ajax'> $output </div>";
+		}
+	else{
+		return 0;
+	}
+ 
+	//$output = "Mensagem de exibição!";
+	$output = "Inserido no banco com sucesso!";
+	return "<div id='codigo-ajax'> $output </div>";
+}
+
+//tribunais
+function form_tribunais_submit_callback($form, &$form_state){
+	$table = 'cadastros_tribunal';
+	
+	$record = array(
+		'nome' => $form_state['values']['nome'],
+	);
+	
+	if(drupal_write_record($table,$record)){
+		drupal_set_message('Inserido com sucesso','status');
+		$output = "Inserido no banco com sucesso!";
+		return "<div id='codigo-ajax'> $output </div>";
+		}
+	else{
+		return 0;
+	}
+ 
+	//$output = "Mensagem de exibição!";
+	$output = "Inserido no banco com sucesso!";
+	return "<div id='codigo-ajax'> $output </div>";
+}
+
+//varas
+function form_varas_submit_callback($form, &$form_state){
+	$table = 'cadastros_varas';
+	
+	$record = array(
+		'nome' => $form_state['values']['nome'],
+	);
+	
+	if(drupal_write_record($table,$record)){
+		drupal_set_message('Inserido com sucesso','status');
+		$output = "Inserido no banco com sucesso!";
+		return "<div id='codigo-ajax'> $output </div>";
+		}
+	else{
+		return 0;
+	}
+ 
+	//$output = "Mensagem de exibição!";
+	$output = "Inserido no banco com sucesso!";
+	return "<div id='codigo-ajax'> $output </div>";
+}
+
+//teste
 function meu_form_submit_callback($form, &$form_state){
 	$table = 'cadastros_varas';
 	

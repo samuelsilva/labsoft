@@ -22,6 +22,7 @@ function cadastros_permission() {
 /**
   * Implements hook_menu().
   */
+  
 function cadastros_menu() {
 	$items = array();
 	
@@ -32,7 +33,7 @@ function cadastros_menu() {
 		'page arguments' => array('juridico'),
 		'access arguments' => array('Liberar cadastros'),
 	);
-	
+/*	
 	//cadastro de cliente
 	$items['cadastro/cliente'] = array(
 		'title' => 'Cadastro de Cliente',
@@ -142,7 +143,7 @@ function cadastros_menu() {
 		'access arguments' => array('Liberar cadastros'),
 		'file' => 'cadastros.inc',
 	);
-/*
+
     $items['cadastro/teste_ajax'] = array(
 		'title' => 'Meu formulario' ,
 		'description' => t('Meu Primeiro Formulario') ,
@@ -150,7 +151,7 @@ function cadastros_menu() {
 		'access arguments' => array('access content') ,
 		'type' => MENU_CALLBACK,
 	);
-*/
+
     $items['cadastro/teste_ajax'] = array(
 		'title' => 'Meu formulario' ,
 		'description' => t('Meu Primeiro Formulario') ,
@@ -159,9 +160,10 @@ function cadastros_menu() {
 		'page arguments' => array('estrutura_do_formulario'),
 		'type' => MENU_CALLBACK,
 	);
-	
+*/	
 	return $items;
 }
+
 
 /******************  TESTE AJAX ********************/
 /*
