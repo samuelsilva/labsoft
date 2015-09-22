@@ -1,6 +1,6 @@
 <?php
 
-	$base_path = 'http://localhost/labsoft/';
+	$base_path = 'http://localhost/TCC/juridico/';
 	$output = '<div id="main"><div id="post-content">';
   
   

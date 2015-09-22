@@ -35,7 +35,7 @@ function processos_menu() {
 	$items = array();
 	
 	//cadastro de processos
-	$items['processos'] = array(
+	$items['juridico/processos'] = array(
 		'title' => 'Processos',
 		'description' => 'Cadastro de processos',
 		'page callback' => 'drupal_get_form',
@@ -52,7 +52,7 @@ function processos_menu() {
 	);
 	
 	//cadastro de processos
-	$items['processos/processo_arquivado'] = array(
+	$items['juridico/processo_arquivado'] = array(
 		'title' => 'Processo Arquivado',
 		'description' => 'Cadastro de processos',
 		'page callback' => 'drupal_get_form',
@@ -62,7 +62,7 @@ function processos_menu() {
 	);
 	
 	//cadastro de processos
-	$items['processos/processo_corrente'] = array(
+	$items['juridico/processo_corrente'] = array(
 		'title' => 'Processo Corrente',
 		'description' => 'Cadastro de processos',
 		'page callback' => 'drupal_get_form',

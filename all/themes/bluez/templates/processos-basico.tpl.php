@@ -1,6 +1,6 @@
 <?php
 
-  $base_path = 'http://localhost/labsoft/';
+  $base_path = 'http://localhost/TCC/';
   $output = '<div id="main"><div id="post-content">';
   
   $output .= '<a class="menu-button" title="Link para processos correntes" href="'.base_path().'processos/processo_corrente"><img class="icon" src="'.base_path().'/'.drupal_get_path('theme', $GLOBALS['theme']).'/images/scale.png"><br/>Corrente</a>';
