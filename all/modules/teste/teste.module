@@ -1036,20 +1036,20 @@ function form_regional_submit_callback($form, &$form_state) {
 	$output = "Inserido no banco com sucesso!";
 	$output_error = "Erro na inserção";
 	
-	if(drupal_write_record($table,$record)!=FALSE){
+	if(drupal_write_record($table,$record)){
 		//drupal_set_message('Inserido com sucesso','status');
 		//$output = "Inserido no banco com sucesso!";
-		$output = "CAIU NO IF";
+		//$output = "CAIU NO IF";
 		return "<div id='codigo-ajax'> $output </div>";
 		}
 	else{
-		$output = "CAIU NO ELSE";
+		//$output = "CAIU NO ELSE";
 		return "<div id='codigo-ajax'> $output </div>";
 	}
  
 	//$output = "Mensagem de exibição!";
-	//$output = "Inserido no banco com sucesso!";
-	//return "<div id='codigo-ajax'> $output </div>";
+	$output = "Inserido no banco com sucesso!";
+	return "<div id='codigo-ajax'> $output </div>";
 }
 
 //conta

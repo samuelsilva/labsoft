@@ -43,7 +43,7 @@ function processos_menu() {
 		'access arguments' => array('Liberar processos'),
 	);
 
-	$items['listagem'] = array(
+	$items['juridico/listagem'] = array(
 		'title' => 'Listagem',
 		'description' => 'Listagem dos dados',
 		'page callback' => 'drupal_get_form',
@@ -52,7 +52,7 @@ function processos_menu() {
 	);
 	
 	//cadastro de processos
-	$items['juridico/processo_arquivado'] = array(
+	$items['juridico/processos/processo_arquivado'] = array(
 		'title' => 'Processo Arquivado',
 		'description' => 'Cadastro de processos',
 		'page callback' => 'drupal_get_form',
@@ -62,7 +62,7 @@ function processos_menu() {
 	);
 	
 	//cadastro de processos
-	$items['juridico/processo_corrente'] = array(
+	$items['juridico/processos/processo_corrente'] = array(
 		'title' => 'Processo Corrente',
 		'description' => 'Cadastro de processos',
 		'page callback' => 'drupal_get_form',
@@ -188,6 +188,8 @@ function processos_basico() {
 }
 
 function _processos_cadastro_corrente() {
+	//module_load_include('inc', 'popup', '/includes/popup.api');
+	module_load_include('inc', 'popup', '/includes/popup.api');
 	$form = array();
 	
 	//****Dados Processuais
@@ -232,6 +234,8 @@ function _processos_cadastro_corrente() {
        '#type' => 'select',
        '#title' => 'Regional',
        '#options' => returnDateCadastros(6),
+       '#field_suffix' => popup(array('form' => 'form_regional', 'activate' => 'click','close' => TRUE, 'width' => 500)),
+       //popup(array('form' => 'search_form', 'activate' => 'click', 'ajax' => 1, 'width' => 350))
        //'#default_value' => 0,
        //'#description' => t('Selecione o Estado Civil'),
     );
@@ -240,6 +244,7 @@ function _processos_cadastro_corrente() {
        '#type' => 'select',
        '#title' => 'Natureza',
        '#options' => returnDateCadastros(5),
+       '#field_suffix' => popup(array('form' => 'form_natureza', 'activate' => 'click','close' => TRUE, 'width' => 500)),
        //'#default_value' => 0,
        //'#description' => t('Selecione o Estado Civil'),
    );
